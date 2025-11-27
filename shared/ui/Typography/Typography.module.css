@@ -1,0 +1,94 @@
+.h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+}
+
+.h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+.h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.bodyLBold {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+.bodyLSB {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.bodyLMed {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
+.bodyMBold {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+}
+
+.bodyMSB {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+.bodyMMed {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+.bodySBold {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+.bodySSB {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.bodySMed {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+.bodyXSBold {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+}
+
+.bodyXSSB {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.bodyXSMed {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+.required {
+  color: var(--color-main);
+}
+

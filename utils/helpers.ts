@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 export const noop = (): void => {};
 
 export function debounce<T extends (...args: unknown[]) => void>(
@@ -64,4 +63,5 @@ export const areCartsEqual = (
 
   return true;
 };
+
 

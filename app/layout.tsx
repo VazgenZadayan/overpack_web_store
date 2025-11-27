@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { StoreProvider } from "@/store/StoreProvider";
 import { I18nProvider } from "@/shared/providers/I18nProvider";
+import { ThemeProvider } from "@/shared/providers/ThemeProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,7 +32,9 @@ export default function RootLayout({
       >
         <StoreProvider>
           <I18nProvider>
-            {children}
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
           </I18nProvider>
         </StoreProvider>
       </body>

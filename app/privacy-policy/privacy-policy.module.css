@@ -1,0 +1,137 @@
+.content {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  padding: 60px 80px;
+  background: var(--color-white);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    padding: 40px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 24px 16px;
+  }
+}
+
+.privacyContent {
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: var(--color-dark);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.dates {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dates p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: var(--color-secondary-text);
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 30px 0 15px 0;
+  color: var(--color-dark);
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 16px;
+    margin: 25px 0 12px 0;
+  }
+}
+
+.subsectionTitle {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0 10px 0;
+  color: var(--color-dark);
+}
+
+@media (max-width: 768px) {
+  .subsectionTitle {
+    font-size: 14px;
+    margin: 15px 0 8px 0;
+  }
+}
+
+.subsubsectionTitle {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 15px 0 8px 0;
+  color: var(--color-dark);
+}
+
+@media (max-width: 768px) {
+  .subsubsectionTitle {
+    font-size: 13px;
+    margin: 12px 0 6px 0;
+  }
+}
+
+.privacyContent p {
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-dark);
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .privacyContent p {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+}
+
+.privacyContent a {
+  color: #0563C1;
+  text-decoration: underline;
+}
+
+.privacyContent a:hover {
+  opacity: 0.8;
+}
+
+.privacyContent b,
+.privacyContent strong {
+  font-weight: 700;
+}
+
+.privacyContent .highlight {
+  background: yellow;
+}
+
+.wordSection {
+  width: 100%;
+}
+

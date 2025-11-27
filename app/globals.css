@@ -1,21 +1,50 @@
 @import "tailwindcss";
 
+/* Light theme colors from mobile app */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-main: #F03341;
+  --color-secondary: #FDEBEC;
+  --color-background: #EFEFEF;
+  --color-gray: #F3F4F6;
+  --color-white: #FFFFFF;
+  --color-white-constant: #FFFFFF;
+  --color-icon: #9D9FAB;
+  --color-dark: #191C30;
+  --color-secondary-text: #6B6D80;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-modal-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Legacy variables for compatibility */
+  --background: var(--color-white);
+  --foreground: var(--color-dark);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-main: #F03341;
+    --color-secondary: #3A1517;
+    --color-background: #141414;
+    --color-gray: #26282B;
+    --color-white: #191C1D;
+    --color-white-constant: #FFFFFF;
+    --color-icon: #9D9FAB;
+    --color-dark: #FAFAFA;
+    --color-secondary-text: #CCCCCC;
+    --color-black: #000000;
+    --color-transparent: transparent;
+    --color-modal-overlay: rgba(0, 0, 0, 0.5);
+    
+    /* Legacy variables for compatibility */
+    --background: var(--color-background);
+    --foreground: var(--color-dark);
   }
 }
 
@@ -24,3 +53,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Hide scrollbar for react-international-phone dropdown */
+.react-international-phone-country-selector-dropdown {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+

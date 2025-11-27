@@ -9,11 +9,31 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
+
+import { authAPI } from '@/services/auth/auth';
 
 import { cartReducer } from './cart/cart.slice';
-import { confirmDialogReducer } from './confirm-dialog/confirm-dialog.slice';
 import { toastReducer } from './toast/toast.slice';
+
+const createNoopStorage = () => {
+  return {
+    getItem(_key: string) {
+      return Promise.resolve(null);
+    },
+    setItem(_key: string, value: unknown) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key: string) {
+      return Promise.resolve();
+    },
+  };
+};
+
+const storage =
+  typeof window !== 'undefined'
+    ? createWebStorage('local')
+    : createNoopStorage();
 
 const cartPersistConfig = {
   key: 'cart',
@@ -25,17 +45,17 @@ const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 export const store = configureStore({
   reducer: {
-    confirmDialog: confirmDialogReducer,
     toast: toastReducer,
     cart: persistedCartReducer,
-    // API reducers will be added here
+    [authAPI.reducerPath]: authAPI.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredPaths: ['toast.onClose', 'toast.icon'],
       },
-    }),
+    }).concat(authAPI.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

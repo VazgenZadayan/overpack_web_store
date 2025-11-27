@@ -1,5 +1,3 @@
-// Web storage utilities (replacement for AsyncStorage)
-
 export const storage = {
   getItem: (key: string): string | null => {
     if (typeof window === 'undefined') return null;
@@ -69,4 +67,5 @@ export const secureStorage = {
     }
   },
 };
+
 

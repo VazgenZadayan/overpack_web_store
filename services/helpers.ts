@@ -16,3 +16,4 @@ export const paramsSerializer = (params: Record<string, unknown>): string => {
   return searchParams.toString();
 };
 
+

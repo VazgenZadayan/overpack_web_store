@@ -1,0 +1,74 @@
+.container {
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonDefault {
+  background-color: var(--color-main);
+  color: var(--color-white-constant);
+}
+
+.buttonDefault:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.buttonDanger {
+  background-color: var(--color-main);
+  color: var(--color-white-constant);
+}
+
+.buttonDanger:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.buttonSecondary {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  background-color: var(--color-main);
+  color: var(--color-secondary-text);
+}
+
+.buttonText {
+  background-color: var(--color-transparent);
+  color: var(--color-secondary-text);
+}
+
+.buttonText:hover:not(:disabled) {
+  background-color: var(--color-gray);
+}
+
+.loadingSpinner {
+  animation: spin 1s linear infinite;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

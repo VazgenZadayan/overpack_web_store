@@ -1,0 +1,20 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-modal-overlay);
+  padding: 1rem;
+}
+
+.container {
+  background-color: var(--color-white);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  max-width: 28rem;
+  width: 100%;
+}
+
