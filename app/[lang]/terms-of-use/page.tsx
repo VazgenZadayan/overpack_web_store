@@ -1,7 +1,12 @@
 'use client';
 
+import { use } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from "./terms-of-use.module.css";
+
+interface TermsOfUsePageProps {
+  params: Promise<{ lang: string }>;
+}
 
 const ENContent = ({ styles }: { styles: Record<string, string> }) => (
     <div className={styles.termsContent}>
@@ -783,9 +788,8 @@ const RUContent = ({ styles }: { styles: Record<string, string> }) => (
   </div>
 );
 
-export default function TermsOfUsePage() {
-  const { i18n } = useTranslation();
-  const lang = i18n.language as 'en' | 'ru' | 'hy';
+export default function TermsOfUsePage({ params }: TermsOfUsePageProps) {
+  const { lang } = use(params);
   
   const titles = {
     en: "Terms of Use",

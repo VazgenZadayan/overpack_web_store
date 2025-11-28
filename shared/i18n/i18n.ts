@@ -20,6 +20,21 @@ const languageDetector: LanguageDetectorAsyncModule = {
     callback: (lng: string | readonly string[] | undefined) => void,
   ): Promise<string | readonly string[] | undefined> => {
     try {
+      // In Next.js App Router, language should come from URL, not browser
+      // This detector is used as fallback only
+      // The actual language is set via I18nProvider from URL params
+      
+      // Try to get from URL pathname first (client-side only)
+      if (typeof window !== 'undefined') {
+        const pathname = window.location.pathname;
+        const pathLang = pathname.split('/')[1];
+        if (pathLang && ['en', 'ru', 'hy'].includes(pathLang)) {
+          callback(pathLang);
+          return pathLang;
+        }
+      }
+
+      // Fallback to stored language
       const storedLanguage = storage.getItem('language');
       if (storedLanguage) {
         let language = storedLanguage;
@@ -36,7 +51,7 @@ const languageDetector: LanguageDetectorAsyncModule = {
         }
       }
 
-      // Get language from browser
+      // Final fallback to browser language
       let browserLanguage = 'en';
       if (typeof window !== 'undefined') {
         const navLang = navigator.language || (navigator as any).userLanguage;
@@ -78,6 +93,8 @@ i18n
       'Order',
       'common',
       'emptyBlock',
+      'notFound',
+      'support',
     ],
     defaultNS: 'Profile',
     interpolation: {

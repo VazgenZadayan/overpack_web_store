@@ -1,5 +1,431 @@
-{"Profile":{"profile":"Profile","logout":{"title":"Leaving already?","helpText":"The coals are still hot, maybe stay a bit longer?","okButton":"Leave anyway","cancelButton":"Stay and smoke"},"tabs":{"language":"Language","addresses":"My addresses","cards":"My cards","history":"My Orders","theme":"Theme","contactUs":"Contact us","partnersTitle":"Our partners"},"logoutButton":"Logout","deleteAccountButton":"Delete Account","deleteAccount":{"title":"Hey, wait! ✋","helpText":"Deleting your account is like breaking a Wookah bowl. Painful, expensive and irreversible. Do you really want to say goodbye to us forever?","okButton":"Yes, delete forever","cancelButton":"No, I changed my mind"},"createAccountButton":"Create Account"},"Auth":{"phoneNumber":{"title":"Enter phone number","subtitle":"For login or registration","tagline":"Hookah market in your pocket","placeholder":"Phone number","getCode":"Get code","enterAsGuest":"Enter as guest","terms":"I agree with the Privacy Policy and User Agreement","termsPrefix":"I agree with the ","termsSuffix":" and ","privacy":"Privacy Policy","agreement":"User Agreement","validation":{"required":"Phone is a required field","format":"Phone must be in format 374-XX-XXXXXX","terms":"You must agree to the terms"},"error":{"title":"Unable to Proceed","message":"Something went wrong, please try again"}},"smsCode":{"title":"Confirm phone number","subtitle":"Enter the code from SMS","resendTimer":"Resend code in","resendButton":"Resend code"},"userType":{"title":"For yourself or for business?","personal":"For personal use","business":"For establishment / store"},"client":{"name":{"title":"Enter your name","placeholder":"Name","register":"Register","skip":"Skip"}},"partner":{"name":{"title":"Enter name","placeholder":"Name","register":"Register"},"tin":{"title":"Enter your TIN","placeholder":"TIN"}},"ageVerification":{"title":"Are you 18 years old?","helpText":"This app is intended only for persons who have reached the age of 18.","okButton":"Yes, I am 18","cancelButton":"No, I am not 18"},"inactiveUser":{"logout":{"title":"Leaving already?","helpText":"Applications are usually processed much faster, maybe wait a bit more?","okButton":"Leave anyway","cancelButton":"Wait"},"title":"Application is being processed","helpText1":"Your application is under review and will be processed within 24 hours.","helpText2":"We will notify you as soon as access to the app is granted.","logoutButton":"Logout"}},"languages":{"russian":"Русский","english":"English","armenian":"Հայերեն","selectLanguage":"Select language","save":"Save"},"Product":{"description":"Have you been wanting to try a natural, tangy pineapple? Black Burn has released a new explosive flavor that will immediately hit your top list. From the very first inhale, you'll be filled with a pleasant sourness and light sweetness that will last throughout the entire session!","addToCart":"Add to cart","inCart":"{{count}} items in cart","outOfStock":"Out of stock","units":{"grams":"g","millimeters":"mm"}},"Cart":{"title":"Cart","select":"Select","cancel":"Cancel","selectAll":"Select all ({{count}})","selected":"Selected:","delivery":"Delivery ~{{price}} ֏","deliveryNoAddress":"Enter Address","deliveryTime":"{{time}} min","deliveryTimeRange":"{{minTime}} - {{maxTime}} min","deliveryLoading":"Calculating...","deliveryError":"Check at order","deliveryTimeError":"Check at order","courierNotFound":"Cannot find a courier...","next":"Next","checkout":"Checkout","deliveryEmpty":"Courier doesn't leave without items","openCart":"Open cart","closeCart":"Close","deleteSelectedModal":{"title":"Delete selected items?","helpText":"Are you sure you want to delete the selected items?","okButton":"Delete","cancelButton":"Cancel"},"cartChanged":{"title":"Cart contents have changed","helpText":"Some items are out of stock, please check your cart before ordering","okButtonText":"Check"}},"Address":{"title":"My addresses","addAddress":"Add address","saveAddress":"Save address","deleteAddress":"Delete address","details":"Entrance {{entrance}}, Apartment {{apartment}}, Floor {{floor}}","AddErrorTitle":"Address not added","AddErrorMessage":"An error occurred while adding the address, please try again or contact us.","CoordinatesErrorMessage":"Failed to get address coordinates","form":{"title":"Home","name":"Address name","address":"Address","deliveryQuestion":"Where to deliver?","addressPlaceholder":"Enter address","additionalDetails":"Additional details","entrance":"Entrance","apartment":"Apartment","floor":"Floor","intercom":"Intercom","other":"Other"},"deleteConfirmation":{"title":"Delete address?","helpText":"Are you sure you want to delete this address?","okButton":"Delete","cancelButton":"Cancel"},"setMainAddress":{"title":"Set address as main?","helpText":"Are you sure you want to set this address as main?","okButton":"Set as main","cancelButton":"Cancel"},"deleteErrorTitle":"Delete error","deleteErrorMessage":"Failed to delete address, please try again","setMainErrorTitle":"Set error","setMainErrorMessage":"Failed to set address as main, please try again"},"Order":{"title":"Order #{{number}}","deliveryAndPayment":"Delivery and payment","address":"Address","addressValue":"{{address}}","dateAndTime":"Date and time","dateTimeValue":"{{date}} at {{time}}","paymentCard":"Payment card","cardValue":"{{card}}","deliveryCost":"Delivery cost","itemsCost":"Items cost","total":"Total","costValue":"{{cost}} {{currency}}","orderContents":"Order contents","quantityUnit":"{{quantity}} pcs","history":{"title":"My Orders","orderNumber":"Order #{{number}}","empty":{"title":"No orders yet","subtitle":"Your order history will appear here after your first purchase"},"repeatOrder":{"title":"Repeat Order","notReady":"This feature is not ready yet","button":"Repeat Order","ok":"OK","cancel":"Cancel","cartNotEmpty":{"title":"Cart already has items","helpText":"Would you like to replace them or add to current items?","replace":"Replace items","add":"Add to current"},"success":"Items added","successMessage":"Order items successfully added to cart","error":"Error","errorMessage":"Failed to add items. Please try again"},"status":{"courierSearching":"Searching for courier","preparing":"Preparing order","courierDelivering":"Courier coming to you","delivered":"Delivered","estimatedDeliveryTime":"Estimated delivery time: {{time}}"},"callCourier":"Call Courier"},"receipt":{"download":"Download Receipt","success":"Receipt Created","successMessage":"Receipt successfully saved and ready to share","error":"Error","errorMessage":"Failed to create receipt. Please try again","orderInfo":"Order Information","recipient":"Recipient","product":"Product","quantity":"Quantity","price":"Price","sum":"Sum","delivery":"Delivery","order":"Order"},"map":{"error":"Error","errorMessage":"Failed to load map"}},"paymentCards":{"title":"My Cards","addCard":{"title":"Add Card","notReady":"This feature is not ready yet","button":"Add Card","ok":"OK","cancel":"Cancel","webViewTitle":"Add Card","cardNameModal":{"title":"Card Name","subtitle":"We don't store card data for your security, so name it to distinguish","placeholder":"For example: Main Card","button":"Save"},"success":"Card added successfully","error":"Card Addition Error","errorMessage":"An error occurred while adding the card. Please try again or contact us."},"setMainCard":{"title":"Set as Main Card","confirmation":"Are you sure you want to set this card as main?","confirm":"Set","cancel":"Cancel","success":"Card successfully set as main","error":"Error setting card as main","errorMessage":"An error occurred while setting the card as main. Please try again or contact us."},"deleteCard":{"title":"Delete Card","confirmation":"Are you sure you want to delete this card?","confirm":"Delete","cancel":"Cancel","success":"Card successfully deleted","error":"Error deleting card","errorMessage":"An error occurred while deleting the card. Please try again or contact us."},"emptyCards":{"title":"You don't have any cards yet","subtitle":"Add a card so you don't have to enter data every time you order"}},"Checkout":{"title":"Checkout","emptyCart":"Your cart is empty","loading":"Preparing your order...","products":{"title":"Products ({{count}})","quantity":"×{{quantity}}","collapsed":"{{count}} items"},"address":{"title":"Delivery Address","details":"Entrance {{entrance}}, Apt. {{apartment}}, Floor {{floor}}","add":"Add delivery address"},"payment":{"title":"Payment Method","card":"My Saved Card","noCard":"No card selected","oneTime":"Use Another Card","webViewTitle":"Payment"},"comment":{"title":"Comment","optional":"(optional)","placeholder":"Add a comment to your order..."},"summary":{"title":"Order Summary","items":"Items","delivery":"Delivery","calculating":"Calculating...","total":"Total"},"placeOrder":"Place Order","workingHours":"Working hours {{workingHours}}","errors":{"noAddress":"Please add a delivery address","noCard":"Please add a payment card","emptyCart":"Your cart is empty","orderFailed":"Failed to place order. Please try again.","paymentError":"Payment Error","paymentErrorMessage":"There was an error processing your payment. Please try again."},"success":{"orderCreated":"Order placed successfully!"},"cartChanges":{"title":"Can't purchase","helpText":"Cart content has slightly changed, please check before placing order","okButton":"OK"}},"common":{"cancel":"Cancel","ok":"OK","DISMISS":"Dismiss","search":"Search","units":{"grams":"g","millimeters":"mm"}},"ThemeSwitcher":{"title":"Choose a style","subtitle":"Day or night.","description":"Customize your interface.","modes":{"system":"System","light":"Light","dark":"Dark"}},"CategoriesPage":{"title":"Categories","noDescription":"Brand information will be added soon","understandButton":"Got it","orderingInactive":{"title":"We're currently closed 😔"}},"emptyBlock":{"title":"It's empty here for now","subtitle":"If you want to list your products with us — contact us and we'll discuss everything over a hookah!"},"NoAddressesPage":{"title":"No address — no hookah","subtitle":"Please provide a delivery address so we can proceed."},"Partners":{"title":"Our partners","reserveTable":"Reserve table","addresses":"Addresses","workingHours":"Working hours","description":"Description","emptyBlockSubtitle":"Want to collaborate with us? Call us!"},"noInternet":{"title":"No Internet Connection","subtitle":"You forgot to turn on the internet, maybe you also forgot to turn on the oven?"},"technicalProblems":{"title":"The app is temporarily unavailable","subtitle":"Someone flooded our bowl, we'll pack a new one and be back soon!"},"GuestMode":{"title":"Guest Mode","subtitle":"You are browsing as a guest","description":"Sign in to access your profile, purchases, order history, and save your preferences.","loginButton":"Sign In","continueAsGuestButton":"Continue as Guest"}}
-
-
-
-
+{
+  "Profile": {
+    "profile": "Profile",
+    "logout": {
+      "title": "Leaving already?",
+      "helpText": "The coals are still hot, maybe stay a bit longer?",
+      "okButton": "Leave anyway",
+      "cancelButton": "Stay and smoke"
+    },
+    "tabs": {
+      "language": "Language",
+      "addresses": "My addresses",
+      "cards": "My cards",
+      "history": "My Orders",
+      "theme": "Theme",
+      "contactUs": "Contact us",
+      "partnersTitle": "Our partners"
+    },
+    "logoutButton": "Logout",
+    "deleteAccountButton": "Delete Account",
+    "deleteAccount": {
+      "title": "Hey, wait! ✋",
+      "helpText": "Deleting your account is like breaking a Wookah bowl. Painful, expensive and irreversible. Do you really want to say goodbye to us forever?",
+      "okButton": "Yes, delete forever",
+      "cancelButton": "No, I changed my mind"
+    },
+    "createAccountButton": "Create Account"
+  },
+  "Auth": {
+    "phoneNumber": {
+      "title": "Enter phone number",
+      "subtitle": "For login or registration",
+      "tagline": "Hookah market in your pocket",
+      "placeholder": "Phone number",
+      "getCode": "Get code",
+      "enterAsGuest": "Enter as guest",
+      "terms": "I agree with the Privacy Policy and User Agreement",
+      "termsPrefix": "I agree with the ",
+      "termsSuffix": " and ",
+      "privacy": "Privacy Policy",
+      "agreement": "User Agreement",
+      "validation": {
+        "required": "Phone is a required field",
+        "format": "Phone must be in format 374-XX-XXXXXX",
+        "terms": "You must agree to the terms"
+      },
+      "error": {
+        "title": "Unable to Proceed",
+        "message": "Something went wrong, please try again"
+      }
+    },
+    "smsCode": {
+      "title": "Confirm phone number",
+      "subtitle": "Enter the code from SMS",
+      "resendTimer": "Resend code in",
+      "resendButton": "Resend code"
+    },
+    "userType": {
+      "title": "For yourself or for business?",
+      "personal": "For personal use",
+      "business": "For establishment / store"
+    },
+    "client": {
+      "name": {
+        "title": "Enter your name",
+        "placeholder": "Name",
+        "register": "Register",
+        "skip": "Skip"
+      }
+    },
+    "partner": {
+      "name": {
+        "title": "Enter name",
+        "placeholder": "Name",
+        "register": "Register"
+      },
+      "tin": {
+        "title": "Enter your TIN",
+        "placeholder": "TIN"
+      }
+    },
+    "ageVerification": {
+      "title": "Are you 18 years old?",
+      "helpText": "This app is intended only for persons who have reached the age of 18.",
+      "okButton": "Yes, I am 18",
+      "cancelButton": "No, I am not 18"
+    },
+    "inactiveUser": {
+      "logout": {
+        "title": "Leaving already?",
+        "helpText": "Applications are usually processed much faster, maybe wait a bit more?",
+        "okButton": "Leave anyway",
+        "cancelButton": "Wait"
+      },
+      "title": "Application is being processed",
+      "helpText1": "Your application is under review and will be processed within 24 hours.",
+      "helpText2": "We will notify you as soon as access to the app is granted.",
+      "logoutButton": "Logout"
+    }
+  },
+  "languages": {
+    "russian": "Русский",
+    "english": "English",
+    "armenian": "Հայերեն",
+    "selectLanguage": "Select language",
+    "save": "Save"
+  },
+  "Product": {
+    "description": "Have you been wanting to try a natural, tangy pineapple? Black Burn has released a new explosive flavor that will immediately hit your top list. From the very first inhale, you'll be filled with a pleasant sourness and light sweetness that will last throughout the entire session!",
+    "addToCart": "Add to cart",
+    "inCart": "{{count}} items in cart",
+    "outOfStock": "Out of stock",
+    "units": {
+      "grams": "g",
+      "millimeters": "mm"
+    }
+  },
+  "Cart": {
+    "title": "Cart",
+    "select": "Select",
+    "cancel": "Cancel",
+    "selectAll": "Select all ({{count}})",
+    "selected": "Selected:",
+    "delivery": "Delivery ~{{price}} ֏",
+    "deliveryNoAddress": "Enter Address",
+    "deliveryTime": "{{time}} min",
+    "deliveryTimeRange": "{{minTime}} - {{maxTime}} min",
+    "deliveryLoading": "Calculating...",
+    "deliveryError": "Check at order",
+    "deliveryTimeError": "Check at order",
+    "courierNotFound": "Cannot find a courier...",
+    "next": "Next",
+    "checkout": "Checkout",
+    "deliveryEmpty": "Courier doesn't leave without items",
+    "openCart": "Open cart",
+    "closeCart": "Close",
+    "deleteSelectedModal": {
+      "title": "Delete selected items?",
+      "helpText": "Are you sure you want to delete the selected items?",
+      "okButton": "Delete",
+      "cancelButton": "Cancel"
+    },
+    "cartChanged": {
+      "title": "Cart contents have changed",
+      "helpText": "Some items are out of stock, please check your cart before ordering",
+      "okButtonText": "Check"
+    }
+  },
+  "Address": {
+    "title": "My addresses",
+    "addAddress": "Add address",
+    "saveAddress": "Save address",
+    "deleteAddress": "Delete address",
+    "details": "Entrance {{entrance}}, Apartment {{apartment}}, Floor {{floor}}",
+    "AddErrorTitle": "Address not added",
+    "AddErrorMessage": "An error occurred while adding the address, please try again or contact us.",
+    "CoordinatesErrorMessage": "Failed to get address coordinates",
+    "form": {
+      "title": "Home",
+      "name": "Address name",
+      "address": "Address",
+      "deliveryQuestion": "Where to deliver?",
+      "addressPlaceholder": "Enter address",
+      "additionalDetails": "Additional details",
+      "entrance": "Entrance",
+      "apartment": "Apartment",
+      "floor": "Floor",
+      "intercom": "Intercom",
+      "other": "Other"
+    },
+    "deleteConfirmation": {
+      "title": "Delete address?",
+      "helpText": "Are you sure you want to delete this address?",
+      "okButton": "Delete",
+      "cancelButton": "Cancel"
+    },
+    "setMainAddress": {
+      "title": "Set address as main?",
+      "helpText": "Are you sure you want to set this address as main?",
+      "okButton": "Set as main",
+      "cancelButton": "Cancel"
+    },
+    "deleteErrorTitle": "Delete error",
+    "deleteErrorMessage": "Failed to delete address, please try again",
+    "setMainErrorTitle": "Set error",
+    "setMainErrorMessage": "Failed to set address as main, please try again"
+  },
+  "Order": {
+    "title": "Order #{{number}}",
+    "deliveryAndPayment": "Delivery and payment",
+    "address": "Address",
+    "addressValue": "{{address}}",
+    "dateAndTime": "Date and time",
+    "dateTimeValue": "{{date}} at {{time}}",
+    "paymentCard": "Payment card",
+    "cardValue": "{{card}}",
+    "deliveryCost": "Delivery cost",
+    "itemsCost": "Items cost",
+    "total": "Total",
+    "costValue": "{{cost}} {{currency}}",
+    "orderContents": "Order contents",
+    "quantityUnit": "{{quantity}} pcs",
+    "history": {
+      "title": "My Orders",
+      "orderNumber": "Order #{{number}}",
+      "empty": {
+        "title": "No orders yet",
+        "subtitle": "Your order history will appear here after your first purchase"
+      },
+      "repeatOrder": {
+        "title": "Repeat Order",
+        "notReady": "This feature is not ready yet",
+        "button": "Repeat Order",
+        "ok": "OK",
+        "cancel": "Cancel",
+        "cartNotEmpty": {
+          "title": "Cart already has items",
+          "helpText": "Would you like to replace them or add to current items?",
+          "replace": "Replace items",
+          "add": "Add to current"
+        },
+        "success": "Items added",
+        "successMessage": "Order items successfully added to cart",
+        "error": "Error",
+        "errorMessage": "Failed to add items. Please try again"
+      },
+      "status": {
+        "courierSearching": "Searching for courier",
+        "preparing": "Preparing order",
+        "courierDelivering": "Courier coming to you",
+        "delivered": "Delivered",
+        "estimatedDeliveryTime": "Estimated delivery time: {{time}}"
+      },
+      "callCourier": "Call Courier"
+    },
+    "receipt": {
+      "download": "Download Receipt",
+      "success": "Receipt Created",
+      "successMessage": "Receipt successfully saved and ready to share",
+      "error": "Error",
+      "errorMessage": "Failed to create receipt. Please try again",
+      "orderInfo": "Order Information",
+      "recipient": "Recipient",
+      "product": "Product",
+      "quantity": "Quantity",
+      "price": "Price",
+      "sum": "Sum",
+      "delivery": "Delivery",
+      "order": "Order"
+    },
+    "map": {
+      "error": "Error",
+      "errorMessage": "Failed to load map"
+    }
+  },
+  "paymentCards": {
+    "title": "My Cards",
+    "addCard": {
+      "title": "Add Card",
+      "notReady": "This feature is not ready yet",
+      "button": "Add Card",
+      "ok": "OK",
+      "cancel": "Cancel",
+      "webViewTitle": "Add Card",
+      "cardNameModal": {
+        "title": "Card Name",
+        "subtitle": "We don't store card data for your security, so name it to distinguish",
+        "placeholder": "For example: Main Card",
+        "button": "Save"
+      },
+      "success": "Card added successfully",
+      "error": "Card Addition Error",
+      "errorMessage": "An error occurred while adding the card. Please try again or contact us."
+    },
+    "setMainCard": {
+      "title": "Set as Main Card",
+      "confirmation": "Are you sure you want to set this card as main?",
+      "confirm": "Set",
+      "cancel": "Cancel",
+      "success": "Card successfully set as main",
+      "error": "Error setting card as main",
+      "errorMessage": "An error occurred while setting the card as main. Please try again or contact us."
+    },
+    "deleteCard": {
+      "title": "Delete Card",
+      "confirmation": "Are you sure you want to delete this card?",
+      "confirm": "Delete",
+      "cancel": "Cancel",
+      "success": "Card successfully deleted",
+      "error": "Error deleting card",
+      "errorMessage": "An error occurred while deleting the card. Please try again or contact us."
+    },
+    "emptyCards": {
+      "title": "You don't have any cards yet",
+      "subtitle": "Add a card so you don't have to enter data every time you order"
+    }
+  },
+  "Checkout": {
+    "title": "Checkout",
+    "emptyCart": "Your cart is empty",
+    "loading": "Preparing your order...",
+    "products": {
+      "title": "Products ({{count}})",
+      "quantity": "×{{quantity}}",
+      "collapsed": "{{count}} items"
+    },
+    "address": {
+      "title": "Delivery Address",
+      "details": "Entrance {{entrance}}, Apt. {{apartment}}, Floor {{floor}}",
+      "add": "Add delivery address"
+    },
+    "payment": {
+      "title": "Payment Method",
+      "card": "My Saved Card",
+      "noCard": "No card selected",
+      "oneTime": "Use Another Card",
+      "webViewTitle": "Payment"
+    },
+    "comment": {
+      "title": "Comment",
+      "optional": "(optional)",
+      "placeholder": "Add a comment to your order..."
+    },
+    "summary": {
+      "title": "Order Summary",
+      "items": "Items",
+      "delivery": "Delivery",
+      "calculating": "Calculating...",
+      "total": "Total"
+    },
+    "placeOrder": "Place Order",
+    "workingHours": "Working hours {{workingHours}}",
+    "errors": {
+      "noAddress": "Please add a delivery address",
+      "noCard": "Please add a payment card",
+      "emptyCart": "Your cart is empty",
+      "orderFailed": "Failed to place order. Please try again.",
+      "paymentError": "Payment Error",
+      "paymentErrorMessage": "There was an error processing your payment. Please try again."
+    },
+    "success": {
+      "orderCreated": "Order placed successfully!"
+    },
+    "cartChanges": {
+      "title": "Can't purchase",
+      "helpText": "Cart content has slightly changed, please check before placing order",
+      "okButton": "OK"
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "ok": "OK",
+    "DISMISS": "Dismiss",
+    "search": "Search",
+    "units": {
+      "grams": "g",
+      "millimeters": "mm"
+    }
+  },
+  "ThemeSwitcher": {
+    "title": "Choose a style",
+    "subtitle": "Day or night.",
+    "description": "Customize your interface.",
+    "modes": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "CategoriesPage": {
+    "title": "Categories",
+    "noDescription": "Brand information will be added soon",
+    "understandButton": "Got it",
+    "orderingInactive": {
+      "title": "We're currently closed 😔"
+    }
+  },
+  "emptyBlock": {
+    "title": "It's empty here for now",
+    "subtitle": "If you want to list your products with us — contact us and we'll discuss everything over a hookah!"
+  },
+  "NoAddressesPage": {
+    "title": "No address — no hookah",
+    "subtitle": "Please provide a delivery address so we can proceed."
+  },
+  "Partners": {
+    "title": "Our partners",
+    "reserveTable": "Reserve table",
+    "addresses": "Addresses",
+    "workingHours": "Working hours",
+    "description": "Description",
+    "emptyBlockSubtitle": "Want to collaborate with us? Call us!"
+  },
+  "noInternet": {
+    "title": "No Internet Connection",
+    "subtitle": "You forgot to turn on the internet, maybe you also forgot to turn on the oven?"
+  },
+  "technicalProblems": {
+    "title": "The app is temporarily unavailable",
+    "subtitle": "Someone flooded our bowl, we'll pack a new one and be back soon!"
+  },
+  "GuestMode": {
+    "title": "Guest Mode",
+    "subtitle": "You are browsing as a guest",
+    "description": "Sign in to access your profile, purchases, order history, and save your preferences.",
+    "loginButton": "Sign In",
+    "continueAsGuestButton": "Continue as Guest"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist.",
+    "backToHome": "Back to Home"
+  },
+  "support": {
+    "title": "Support",
+    "description": "We are here to help! If you have any questions or need assistance, feel free to contact us through any of the following methods.",
+    "phone": {
+      "title": "Phone",
+      "note": "Call us anytime during business hours"
+    },
+    "email": {
+      "title": "Email",
+      "note": "We will respond within 24 hours"
+    },
+    "workingHours": {
+      "title": "Working Hours",
+      "text": "Monday - Sunday: 10:00 AM - 10:00 PM"
+    },
+    "additionalInfo": "Our support team is always ready to assist you with any questions about orders, delivery, products, or the app."
+  }
+}

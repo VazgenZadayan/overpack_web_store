@@ -25,7 +25,14 @@ interface LoginFormData {
   checkbox: boolean;
 }
 
-export default function LoginPage() {
+import { use } from 'react';
+
+interface LoginPageProps {
+  params: Promise<{ lang: string }>;
+}
+
+export default function LoginPage({ params }: LoginPageProps) {
+  const { lang } = use(params);
   const { t } = useTranslation('Auth');
   const router = useRouter();
   const dispatch = useDispatch();
@@ -71,8 +78,8 @@ export default function LoginPage() {
     try {
       await sendSMSToUser({ phone: phoneNumber }).unwrap();
       setIsDialogOpen(false);
-      // TODO: Пока переходим на категории, потом будет /login/sms-code
-      router.push('/categories');
+      // Redirect to OTP page
+      router.push(`/${lang}/login/otp`);
     } catch {
       setIsDialogOpen(false);
       dispatch(
@@ -102,7 +109,7 @@ export default function LoginPage() {
       handleSendSMSToUser();
     } else if (dialogAction === 'guest') {
       setIsDialogOpen(false);
-      router.push('/categories');
+      router.push(`/${lang}/categories`);
     }
   };
 
@@ -118,7 +125,16 @@ export default function LoginPage() {
         backgroundColor: 'var(--color-background)',
       }}
     >
+      {/* White dots pattern */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+        }}
+      />
 
+      {/* Header Section with Logo and Title */}
       <div className="relative z-10 flex flex-col items-center justify-center pt-6 px-4">
         <Logo theme={resolvedTheme} className="h-16 w-auto mb-8" />
         <Typography 
@@ -130,6 +146,7 @@ export default function LoginPage() {
         </Typography>
       </div>
 
+      {/* White Card with Form - positioned at bottom */}
       <div className="relative z-10 flex-1 flex items-end justify-center px-4 pb-0">
         <div className="w-full max-w-md">
           <div 
@@ -187,7 +204,7 @@ export default function LoginPage() {
                       >
                         {t('phoneNumber.termsPrefix')}
                         <Link
-                          href="/privacy-policy"
+                          href={`/${lang}/privacy-policy`}
                           className="underline"
                           style={{ 
                             color: 'var(--color-main)',
@@ -199,7 +216,7 @@ export default function LoginPage() {
                         </Link>
                         {t('phoneNumber.termsSuffix')}
                         <Link
-                          href="/terms-of-use"
+                          href={`/${lang}/terms-of-use`}
                           className="underline"
                           style={{ 
                             color: 'var(--color-main)',

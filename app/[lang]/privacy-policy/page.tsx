@@ -1,7 +1,12 @@
 'use client';
 
+import { use } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from "./privacy-policy.module.css";
+
+interface PrivacyPolicyPageProps {
+  params: Promise<{ lang: string }>;
+}
 
 const ENContent = ({ styles }: { styles: Record<string, string> }) => (
     <div className={styles.privacyContent}>
@@ -620,9 +625,8 @@ const RUContent = ({ styles }: { styles: Record<string, string> }) => (
   </div>
 );
 
-export default function PrivacyPolicyPage() {
-  const { i18n } = useTranslation();
-  const lang = i18n.language as 'en' | 'ru' | 'hy';
+export default function PrivacyPolicyPage({ params }: PrivacyPolicyPageProps) {
+  const { lang } = use(params);
   
   const titles = {
     en: "Privacy Policy",

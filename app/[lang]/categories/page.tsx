@@ -1,8 +1,14 @@
 'use client';
 
+import { use } from 'react';
 import { Typography } from '@/shared/ui/Typography/Typography';
 
-export default function CategoriesPage() {
+interface CategoriesPageProps {
+  params: Promise<{ lang: string }>;
+}
+
+export default function CategoriesPage({ params }: CategoriesPageProps) {
+  const { lang } = use(params);
   return (
     <div 
       className="min-h-screen flex items-center justify-center"
@@ -15,14 +21,14 @@ export default function CategoriesPage() {
           variant="h1"
           style={{ color: 'var(--color-dark)' }}
         >
-          Категории
+          Categories
         </Typography>
         <Typography
           variant="bodyMMed"
           className="mt-4"
           style={{ color: 'var(--color-secondary-text)' }}
         >
-          Страница категорий будет добавлена позже
+          Categories page will be added later
         </Typography>
       </div>
     </div>
