@@ -5,18 +5,17 @@ import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useDispatch } from 'react-redux';
 import { PhoneNumberUtil } from 'google-libphonenumber';
-import { useSendSMSToUserMutation } from '@/services/auth/auth';
-import { showToast } from '@/store/toast/toast.slice';
+import { sendSMSToUser } from '@/lib/api/auth';
+import { useToastStore } from '@/stores/toast';
 import { Button } from '@/shared/ui/Button/Button';
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
 import { PhoneInput } from '@/shared/ui/PhoneInput/PhoneInput';
 import { Typography } from '@/shared/ui/Typography/Typography';
 import { Dialog } from '@/shared/ui/Dialog/Dialog';
 import { Logo } from '@/shared/icons/Logo';
-import { useTheme } from '@/shared/providers/ThemeProvider';
-import { IRegistrationFormData } from '@/services/auth/types';
+import { useTheme } from '@/shared/contexts/ThemeProvider';
+import { IRegistrationFormData } from '@/shared/types/auth';
 
 interface LoginPageProps {
   params: Promise<{ lang: string }>;
@@ -26,9 +25,9 @@ export default function LoginPage({ params }: LoginPageProps) {
   const { lang } = use(params);
   const t = useTranslations('Auth');
   const router = useRouter();
-  const dispatch = useDispatch();
+  const showToast = useToastStore((state) => state.showToast);
   const { resolvedTheme } = useTheme();
-  const [sendSMSToUser, { isLoading }] = useSendSMSToUserMutation();
+  const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogAction, setDialogAction] = useState<'signin' | null>(null);
 
@@ -58,24 +57,25 @@ export default function LoginPage({ params }: LoginPageProps) {
     
     const phoneNumber = `${phone.countryCode.replace('+', '')}${phone.phoneNumber}`;
     
+    setIsLoading(true);
     try {
-      await sendSMSToUser({ phone: phoneNumber }).unwrap();
-            setValue('phone', phone, { shouldValidate: false });
-        if (typeof window !== 'undefined') {
+      await sendSMSToUser({ phone: phoneNumber });
+      setValue('phone', phone, { shouldValidate: false });
+      if (typeof window !== 'undefined') {
         sessionStorage.setItem('registration_phone', JSON.stringify(phone));
       }
-            setIsDialogOpen(false);
+      setIsDialogOpen(false);
       
       const otpPath = `/${lang}/login/otp`;
       router.replace(otpPath);
     } catch {
       setIsDialogOpen(false);
-      dispatch(
-        showToast({
-          title: t('phoneNumber.error.title'),
-          message: t('phoneNumber.error.message'),
-        })
-      );
+      showToast({
+        title: t('phoneNumber.error.title'),
+        message: t('phoneNumber.error.message'),
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 

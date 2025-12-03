@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-import { IRegistrationFormData } from '@/services/auth/types';
+import { IRegistrationFormData } from '@/shared/types/auth';
 
 const defaultValues: IRegistrationFormData = {
   phone: {

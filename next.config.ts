@@ -45,6 +45,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: [
     'http://192.168.1.209:4230',
     'http://localhost:4230',
+    'http://127.0.0.1:4230',
   ],
 };
 

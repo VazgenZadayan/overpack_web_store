@@ -4,17 +4,16 @@ import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { useDispatch } from 'react-redux';
-import { useSignInMutation, useSignUpMutation } from '@/services/auth/auth';
-import { showToast } from '@/store/toast/toast.slice';
+import { signIn, signUp } from '@/lib/api/auth';
+import { useToastStore } from '@/stores/toast';
 import { Button } from '@/shared/ui/Button/Button';
 import { Input } from '@/shared/ui/Input/Input';
 import { Typography } from '@/shared/ui/Typography/Typography';
 import { Logo } from '@/shared/icons/Logo';
 import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
-import { useTheme } from '@/shared/providers/ThemeProvider';
-import { IRegistrationFormData, ISignUpRequest } from '@/services/auth/types';
+import { useTheme } from '@/shared/contexts/ThemeProvider';
+import { IRegistrationFormData, ISignUpRequest } from '@/shared/types/auth';
 import { setAuthToken } from '@/utils/auth';
 
 interface RegisterPageProps {
@@ -30,10 +29,8 @@ export default function RegisterPage({ params }: RegisterPageProps) {
   const { lang } = use(params);
   const t = useTranslations('Auth');
   const router = useRouter();
-  const dispatch = useDispatch();
+  const showToast = useToastStore((state) => state.showToast);
   const { resolvedTheme } = useTheme();
-  const [signUp] = useSignUpMutation();
-  const [signIn] = useSignInMutation();
   const { control, watch } = useFormContext<IRegistrationFormData>();
   const phone = watch('phone');
   const userType = watch('type');
@@ -76,30 +73,26 @@ export default function RegisterPage({ params }: RegisterPageProps) {
         ...(isPartner && documentNumber ? { documentNumber } : {}),
       };
 
-      await signUp(signUpData).unwrap();
+      await signUp(signUpData);
       
       const code = watch('code');
       if (!code) {
-        dispatch(
-          showToast({
-            title: t('phoneNumber.error.title'),
-            message: t('phoneNumber.error.message'),
-          })
-        );
+        showToast({
+          title: t('phoneNumber.error.title'),
+          message: t('phoneNumber.error.message'),
+        });
         return;
       }
 
-      const signInData = await signIn({ phone: fullPhoneNumber, code }).unwrap();
+      const signInData = await signIn({ phone: fullPhoneNumber, code });
       await setAuthToken(signInData.data.token);
       router.replace(`/${lang}/categories`);
     } catch (error) {
       console.error('Registration error:', error);
-      dispatch(
-        showToast({
-          title: t('phoneNumber.error.title'),
-          message: t('phoneNumber.error.message'),
-        })
-      );
+      showToast({
+        title: t('phoneNumber.error.title'),
+        message: t('phoneNumber.error.message'),
+      });
     }
   };
 

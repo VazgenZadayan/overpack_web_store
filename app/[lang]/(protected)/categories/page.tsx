@@ -1,29 +1,24 @@
+import { getTranslations } from 'next-intl/server';
+import { CategoryList } from '@/components/categories/CategoryList';
 import { Typography } from '@/shared/ui/Typography/Typography';
+import styles from './categories.module.css';
 
-export default function CategoriesPage() {
+export default async function CategoriesPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const t = await getTranslations('CategoriesPage');
+
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center"
-      style={{ 
-        backgroundColor: 'var(--color-background)',
-      }}
-    >
-      <div className="text-center px-4">
-        <Typography
-          variant="h1"
-          style={{ color: 'var(--color-dark)' }}
-        >
-          Categories
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <Typography variant="h1" className={styles.title}>
+          {t('title')}
         </Typography>
-        <Typography
-          variant="bodyMMed"
-          className="mt-4"
-          style={{ color: 'var(--color-secondary-text)' }}
-        >
-          Categories page will be added later
-        </Typography>
+        <CategoryList language={lang} />
       </div>
     </div>
   );
 }
-

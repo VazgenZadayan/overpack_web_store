@@ -8,8 +8,8 @@ import { Typography } from '@/shared/ui/Typography/Typography';
 import { Logo } from '@/shared/icons/Logo';
 import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
-import { useTheme } from '@/shared/providers/ThemeProvider';
-import { IRegistrationFormData } from '@/services/auth/types';
+import { useTheme } from '@/shared/contexts/ThemeProvider';
+import { IRegistrationFormData } from '@/shared/types/auth';
 
 interface SelectUserTypePageProps {
   params: Promise<{ lang: string }>;

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-white);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  border-color: var(--color-main);
+}
+
+.tab.active {
+  background-color: var(--color-main);
+  border-color: var(--color-main);
+  color: var(--color-white);
+}
+
+.tab.active p {
+  color: var(--color-white);
+}
+

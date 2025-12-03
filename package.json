@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@reduxjs/toolkit": "^2.11.0",
     "clsx": "^2.1.1",
     "google-libphonenumber": "^3.2.43",
     "lottie-react": "^2.4.1",
@@ -20,9 +19,10 @@
     "react-dom": "19.2.0",
     "react-hook-form": "^7.66.1",
     "react-international-phone": "^4.6.0",
-    "react-redux": "^9.2.0",
+    "swr": "^2.3.7",
     "tailwind-merge": "^3.4.0",
-    "yup": "^1.7.1"
+    "yup": "^1.7.1",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

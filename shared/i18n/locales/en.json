@@ -56,6 +56,10 @@
       "resendButton": "Resend code",
       "validation": {
         "required": "Code is required"
+      },
+      "error": {
+        "title": "Invalid code",
+        "message": "The code you entered is incorrect. Please try again"
       }
     },
     "userType": {

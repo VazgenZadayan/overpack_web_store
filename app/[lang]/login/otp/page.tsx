@@ -4,19 +4,14 @@ import { useEffect, useState, useRef, startTransition, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
-import { useDispatch } from 'react-redux';
-import {
-  useSendSMSToUserMutation,
-  useSignInMutation,
-  useVerifySMSMutation,
-} from '@/services/auth/auth';
-import { showToast } from '@/store/toast/toast.slice';
+import { sendSMSToUser, signIn, verifySMS } from '@/lib/api/auth';
+import { useToastStore } from '@/stores/toast';
 import { Button } from '@/shared/ui/Button/Button';
 import { Typography } from '@/shared/ui/Typography/Typography';
 import { OTPInput } from '@/shared/ui/OTPInput/OTPInput';
 import { Logo } from '@/shared/icons/Logo';
-import { useTheme } from '@/shared/providers/ThemeProvider';
-import { IRegistrationFormData } from '@/services/auth/types';
+import { useTheme } from '@/shared/contexts/ThemeProvider';
+import { IRegistrationFormData } from '@/shared/types/auth';
 import { setAuthToken } from '@/utils/auth';
 import Lottie from 'lottie-react';
 interface OTPPageProps {
@@ -27,12 +22,10 @@ export default function OTPPage({ params }: OTPPageProps) {
   const { lang } = use(params);
   const t = useTranslations('Auth');
   const router = useRouter();
-  const dispatch = useDispatch();
+  const showToast = useToastStore((state) => state.showToast);
   const { resolvedTheme } = useTheme();
   const [timer, setTimer] = useState<number | false>(60);
-  const [verifySMS] = useVerifySMSMutation();
-  const [sendSMSToUser, { isLoading: isResending }] = useSendSMSToUserMutation();
-  const [signIn] = useSignInMutation();
+  const [isResending, setIsResending] = useState(false);
   const { setValue, watch } = useFormContext<IRegistrationFormData>();
   const [phoneRestored, setPhoneRestored] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -118,11 +111,11 @@ export default function OTPPage({ params }: OTPPageProps) {
     
     setHasError(false);
     try {
-      const data = await verifySMS({ phone: fullPhoneNumber, code }).unwrap();
+      const data = await verifySMS({ phone: fullPhoneNumber, code });
       
       if (data.data.userExists) {
         try {
-          const signInData = await signIn({ phone: fullPhoneNumber, code }).unwrap();
+          const signInData = await signIn({ phone: fullPhoneNumber, code });
           await setAuthToken(signInData.data.token);
           router.replace(`/${lang}/categories`);
         } catch {
@@ -131,12 +124,10 @@ export default function OTPPage({ params }: OTPPageProps) {
             setHasError(false);
             errorTimeoutRef.current = null;
           }, 2000);
-          dispatch(
-            showToast({
-              title: t('phoneNumber.error.title'),
-              message: t('phoneNumber.error.message'),
-            })
-          );
+          showToast({
+            title: t('phoneNumber.error.title'),
+            message: t('phoneNumber.error.message'),
+          });
         }
       } else {
         setValue('code', code);
@@ -148,28 +139,27 @@ export default function OTPPage({ params }: OTPPageProps) {
         setHasError(false);
         errorTimeoutRef.current = null;
       }, 2000);
-      dispatch(
-        showToast({
-          title: t('phoneNumber.error.title'),
-          message: t('phoneNumber.error.message'),
-        })
-      );
+      showToast({
+        title: t('smsCode.error.title'),
+        message: t('smsCode.error.message'),
+      });
     }
   };
 
   const handleResendSMS = async () => {
     if (!fullPhoneNumber) return;
 
+    setIsResending(true);
     try {
-      await sendSMSToUser({ phone: fullPhoneNumber }).unwrap();
+      await sendSMSToUser({ phone: fullPhoneNumber });
       setTimer(60);
     } catch {
-      dispatch(
-        showToast({
-          title: t('phoneNumber.error.title'),
-          message: t('phoneNumber.error.message'),
-        })
-      );
+      showToast({
+        title: t('phoneNumber.error.title'),
+        message: t('phoneNumber.error.message'),
+      });
+    } finally {
+      setIsResending(false);
     }
   };
 
