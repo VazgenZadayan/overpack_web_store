@@ -37,35 +37,4 @@ export const storage = {
   },
 };
 
-// Secure storage simulation (for tokens)
-export const secureStorage = {
-  getItem: (key: string): string | null => {
-    if (typeof window === 'undefined') return null;
-    try {
-      return localStorage.getItem(`secure_${key}`);
-    } catch (error) {
-      console.error('Error getting item from secureStorage:', error);
-      return null;
-    }
-  },
-
-  setItem: (key: string, value: string): void => {
-    if (typeof window === 'undefined') return;
-    try {
-      localStorage.setItem(`secure_${key}`, value);
-    } catch (error) {
-      console.error('Error setting item to secureStorage:', error);
-    }
-  },
-
-  removeItem: (key: string): void => {
-    if (typeof window === 'undefined') return;
-    try {
-      localStorage.removeItem(`secure_${key}`);
-    } catch (error) {
-      console.error('Error removing item from secureStorage:', error);
-    }
-  },
-};
-
 

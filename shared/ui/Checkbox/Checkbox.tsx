@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '@/utils/cn';
 import styles from './Checkbox.module.css';
 
-interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface CheckboxProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isChecked: boolean;
   onPress: () => void;
   background?: string;

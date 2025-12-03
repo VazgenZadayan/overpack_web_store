@@ -1,11 +1,10 @@
 'use client';
 
 import { use } from 'react';
-import { useTranslation } from 'react-i18next';
 import styles from "./terms-of-use.module.css";
 
 interface TermsOfUsePageProps {
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: 'en' | 'hy' | 'ru' }>;
 }
 
 const ENContent = ({ styles }: { styles: Record<string, string> }) => (

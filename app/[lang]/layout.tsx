@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 import { StoreProvider } from "@/store/StoreProvider";
-import { I18nProvider } from "@/shared/providers/I18nProvider";
-import { ThemeProvider } from "@/shared/providers/ThemeProvider";
+import { ThemeProvider, type ThemeType } from "@/shared/providers/ThemeProvider";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -16,9 +19,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SUPPORTED_LANGS = ['en', 'hy', 'ru'] as const;
-type Lang = typeof SUPPORTED_LANGS[number];
-
 interface LangLayoutProps {
   children: React.ReactNode;
   params: Promise<{ lang: string }>;
@@ -28,11 +28,6 @@ function getMetadata(lang: string): Metadata {
   const baseUrl = 'https://overpack.am';
   const langPath = lang === 'en' ? '' : `/${lang}`;
   const canonical = `${baseUrl}${langPath}/`;
-
-  const alternateLanguages = SUPPORTED_LANGS.map(l => ({
-    hreflang: l,
-    url: l === 'en' ? `${baseUrl}/` : `${baseUrl}/${l}/`,
-  }));
 
   return {
     metadataBase: new URL(baseUrl),
@@ -48,13 +43,13 @@ function getMetadata(lang: string): Metadata {
 }
 
 export function generateStaticParams() {
-  return SUPPORTED_LANGS.map((lang) => ({ lang }));
+  return routing.locales.map((locale) => ({ lang: locale }));
 }
 
 export async function generateMetadata({ params }: LangLayoutProps): Promise<Metadata> {
   const { lang } = await params;
   
-  if (!SUPPORTED_LANGS.includes(lang as Lang)) {
+  if (!hasLocale(routing.locales, lang)) {
     notFound();
   }
 
@@ -67,14 +62,21 @@ export default async function LangLayout({
 }: LangLayoutProps) {
   const { lang } = await params;
 
-  if (!SUPPORTED_LANGS.includes(lang as Lang)) {
+  if (!hasLocale(routing.locales, lang)) {
     notFound();
   }
 
   const htmlLang = lang === 'hy' ? 'am' : lang;
+  
+  const messages = await getMessages();
+  
+  const cookieStore = await cookies();
+  const savedTheme = (cookieStore.get('theme')?.value || 'system') as ThemeType;
+  
+  const initialDataTheme = savedTheme === 'system' ? 'light' : savedTheme;
 
   return (
-    <html lang={htmlLang}>
+    <html lang={htmlLang} data-theme={initialDataTheme}>
       <head>
         <link rel="canonical" href={`https://overpack.am${lang === 'en' ? '/' : `/${lang}/`}`} />
         <link rel="alternate" hrefLang="en" href="https://overpack.am/" />
@@ -83,11 +85,11 @@ export default async function LangLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <StoreProvider>
-          <I18nProvider>
-            <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <ThemeProvider initialTheme={savedTheme}>
               {children}
             </ThemeProvider>
-          </I18nProvider>
+          </NextIntlClientProvider>
         </StoreProvider>
       </body>
     </html>

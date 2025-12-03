@@ -1,11 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-import { storage } from '@/utils/storage';
 import { lightThemeColors, darkThemeColors, ThemeColors } from '@/shared/constants/colors';
-
-const THEME_STORAGE_KEY = '@theme_preference';
 
 export type ThemeType = 'light' | 'dark' | 'system';
 
@@ -18,16 +14,19 @@ interface IThemeContextType {
 
 const ThemeContext = createContext<IThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{
+interface ThemeProviderProps {
   children: React.ReactNode;
-}> = ({ children }) => {
-  const [themeType, setThemeType] = useState<ThemeType>('system');
+  initialTheme?: ThemeType;
+}
+
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ 
+  children, 
+  initialTheme = 'system' 
+}) => {
+  const [themeType, setThemeType] = useState<ThemeType>(initialTheme);
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light');
 
-  // Detect system theme
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
       setSystemTheme(e.matches ? 'dark' : 'light');
@@ -36,52 +35,28 @@ export const ThemeProvider: React.FC<{
     handleChange(mediaQuery);
     mediaQuery.addEventListener('change', handleChange);
 
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Load saved theme from storage
+  const resolvedTheme = themeType === 'system' ? systemTheme : themeType;
+
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
+  }, [resolvedTheme]);
 
+  const handleThemeChange = async (newTheme: ThemeType): Promise<void> => {
     try {
-      const savedTheme = storage.getItem(THEME_STORAGE_KEY);
-      if (savedTheme) {
-        let theme: ThemeType;
-        try {
-          theme = JSON.parse(savedTheme) as ThemeType;
-        } catch {
-          theme = savedTheme as ThemeType;
-        }
-
-        if (theme === 'system' || theme === 'light' || theme === 'dark') {
-          setThemeType(theme);
-        } else {
-          setThemeType('system');
-          storage.setItem(THEME_STORAGE_KEY, JSON.stringify('system'));
-        }
-      } else {
-        setThemeType('system');
-        storage.setItem(THEME_STORAGE_KEY, JSON.stringify('system'));
-      }
-    } catch (error) {
-      console.error('Error loading theme:', error);
-      setThemeType('system');
-    }
-  }, []);
-
-  const handleThemeChange = (newTheme: ThemeType): void => {
-    try {
-      storage.setItem(THEME_STORAGE_KEY, JSON.stringify(newTheme));
+      await fetch('/api/theme/set', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ theme: newTheme }),
+      });
+      
       setThemeType(newTheme);
     } catch (error) {
       console.error('Error saving theme:', error);
     }
   };
-
-  const resolvedTheme =
-    themeType === 'system' ? systemTheme : themeType;
 
   const colors = resolvedTheme === 'dark' ? darkThemeColors : lightThemeColors;
 

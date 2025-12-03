@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { Logo } from "@/shared/icons/Logo";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export default function NotFound() {
   const params = useParams();
   const pathname = usePathname();
-  const { t } = useTranslation('notFound');
+  const t = useTranslations('notFound');
   
   let lang = params?.lang as string;
   if (!lang && pathname) {

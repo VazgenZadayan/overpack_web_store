@@ -47,6 +47,12 @@ const variantClasses: Record<Variant, string> = {
   bodyXSMed: styles.bodyXSMed,
 };
 
+const textAlignClasses: Record<TextAlign, string> = {
+  left: 'text-left',
+  right: 'text-right',
+  center: 'text-center',
+};
+
 export const Typography: React.FC<TypographyProps> = ({
   variant = 'bodyMSB',
   color,
@@ -62,7 +68,7 @@ export const Typography: React.FC<TypographyProps> = ({
     <Component
       className={cn(
         variantClasses[variant],
-        `text-${textAlign}`,
+        textAlignClasses[textAlign],
         className
       )}
       style={{ color }}

@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useState, use } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 import { useDispatch } from 'react-redux';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import { useSendSMSToUserMutation } from '@/services/auth/auth';
@@ -16,16 +16,7 @@ import { Typography } from '@/shared/ui/Typography/Typography';
 import { Dialog } from '@/shared/ui/Dialog/Dialog';
 import { Logo } from '@/shared/icons/Logo';
 import { useTheme } from '@/shared/providers/ThemeProvider';
-
-interface LoginFormData {
-  phone: {
-    countryCode: string;
-    phoneNumber: string;
-  };
-  checkbox: boolean;
-}
-
-import { use } from 'react';
+import { IRegistrationFormData } from '@/services/auth/types';
 
 interface LoginPageProps {
   params: Promise<{ lang: string }>;
@@ -33,26 +24,16 @@ interface LoginPageProps {
 
 export default function LoginPage({ params }: LoginPageProps) {
   const { lang } = use(params);
-  const { t } = useTranslation('Auth');
+  const t = useTranslations('Auth');
   const router = useRouter();
   const dispatch = useDispatch();
   const { resolvedTheme } = useTheme();
   const [sendSMSToUser, { isLoading }] = useSendSMSToUserMutation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [dialogAction, setDialogAction] = useState<'signin' | 'guest' | null>(null);
+  const [dialogAction, setDialogAction] = useState<'signin' | null>(null);
 
-  const methods = useForm<LoginFormData>({
-    defaultValues: {
-      phone: {
-        countryCode: '+374',
-        phoneNumber: '',
-      },
-      checkbox: false,
-    },
-    mode: 'onChange',
-  });
-
-  const { watch, setValue, trigger } = methods;
+  const formContext = useFormContext<IRegistrationFormData>();
+  const { watch, setValue, trigger } = formContext;
   const phone = watch('phone');
   const checkbox = watch('checkbox');
 
@@ -71,15 +52,22 @@ export default function LoginPage({ params }: LoginPageProps) {
   })() : false;
 
   const handleSendSMSToUser = async () => {
-    if (!phone?.countryCode || !phone?.phoneNumber) return;
+    if (!phone?.countryCode || !phone?.phoneNumber) {
+      return;
+    }
     
     const phoneNumber = `${phone.countryCode.replace('+', '')}${phone.phoneNumber}`;
     
     try {
       await sendSMSToUser({ phone: phoneNumber }).unwrap();
-      setIsDialogOpen(false);
-      // Redirect to OTP page
-      router.push(`/${lang}/login/otp`);
+            setValue('phone', phone, { shouldValidate: false });
+        if (typeof window !== 'undefined') {
+        sessionStorage.setItem('registration_phone', JSON.stringify(phone));
+      }
+            setIsDialogOpen(false);
+      
+      const otpPath = `/${lang}/login/otp`;
+      router.replace(otpPath);
     } catch {
       setIsDialogOpen(false);
       dispatch(
@@ -99,17 +87,9 @@ export default function LoginPage({ params }: LoginPageProps) {
     }
   };
 
-  const handleEnterAsGuest = () => {
-    setDialogAction('guest');
-    setIsDialogOpen(true);
-  };
-
-  const handleDialogOk = () => {
+  const handleDialogOk = async () => {
     if (dialogAction === 'signin') {
-      handleSendSMSToUser();
-    } else if (dialogAction === 'guest') {
-      setIsDialogOpen(false);
-      router.push(`/${lang}/categories`);
+      await handleSendSMSToUser();
     }
   };
 
@@ -125,7 +105,6 @@ export default function LoginPage({ params }: LoginPageProps) {
         backgroundColor: 'var(--color-background)',
       }}
     >
-      {/* White dots pattern */}
       <div
         className="absolute inset-0"
         style={{
@@ -134,7 +113,6 @@ export default function LoginPage({ params }: LoginPageProps) {
         }}
       />
 
-      {/* Header Section with Logo and Title */}
       <div className="relative z-10 flex flex-col items-center justify-center pt-6 px-4">
         <Logo theme={resolvedTheme} className="h-16 w-auto mb-8" />
         <Typography 
@@ -146,7 +124,6 @@ export default function LoginPage({ params }: LoginPageProps) {
         </Typography>
       </div>
 
-      {/* White Card with Form - positioned at bottom */}
       <div className="relative z-10 flex-1 flex items-end justify-center px-4 pb-0">
         <div className="w-full max-w-md">
           <div 
@@ -172,18 +149,17 @@ export default function LoginPage({ params }: LoginPageProps) {
               </Typography>
             </div>
 
-            <FormProvider {...methods}>
-              <form 
-                className="flex flex-col flex-1"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <div className="space-y-10 flex-1">
-                    <PhoneInput
-                      name="phone"
-                      control={methods.control}
-                      placeholder={t('phoneNumber.placeholder')}
-                      required
-                    />
+            <form 
+              className="flex flex-col flex-1"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <div className="space-y-10 flex-1">
+                <PhoneInput
+                  name="phone"
+                  control={formContext.control}
+                  placeholder={t('phoneNumber.placeholder')}
+                  required
+                />
 
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 flex-shrink-0">
@@ -240,15 +216,8 @@ export default function LoginPage({ params }: LoginPageProps) {
                     isLoading={isLoading}
                     className="w-full"
                   />
-                  <Button
-                    label={t('phoneNumber.enterAsGuest')}
-                    variant="text"
-                    onClick={handleEnterAsGuest}
-                    className="w-full"
-                  />
-                </div>
-              </form>
-            </FormProvider>
+              </div>
+            </form>
           </div>
         </div>
       </div>

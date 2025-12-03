@@ -1,6 +1,6 @@
 import { IBaseSuccessResponse } from '../types';
 
-export type IUserType = 'client' | 'partner';
+export type IUserType = 1 | 2;
 
 export interface ISendSMSRequest {
   phone: string;
@@ -33,6 +33,18 @@ export interface ISignInResponse extends IBaseSuccessResponse {
   data: {
     token: string;
   };
+}
+
+export interface IRegistrationFormData {
+  phone: {
+    countryCode?: string;
+    phoneNumber?: string;
+  };
+  checkbox: boolean;
+  code: string;
+  name: string;
+  type: IUserType;
+  documentNumber?: string;
 }
 
 

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Light theme colors from mobile app */
+/* Default light theme colors */
 :root {
   --color-main: #F03341;
   --color-secondary: #FDEBEC;
@@ -20,32 +20,31 @@
   --foreground: var(--color-dark);
 }
 
+/* Dark theme colors via data attribute */
+[data-theme="dark"] {
+  --color-main: #F03341;
+  --color-secondary: #3A1517;
+  --color-background: #141414;
+  --color-gray: #26282B;
+  --color-white: #191C1D;
+  --color-white-constant: #FFFFFF;
+  --color-icon: #9D9FAB;
+  --color-dark: #FAFAFA;
+  --color-secondary-text: #CCCCCC;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-modal-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Legacy variables for compatibility */
+  --background: var(--color-background);
+  --foreground: var(--color-dark);
+}
+
 @theme inline {
   --color-background: var(--color-background);
   --color-foreground: var(--color-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-main: #F03341;
-    --color-secondary: #3A1517;
-    --color-background: #141414;
-    --color-gray: #26282B;
-    --color-white: #191C1D;
-    --color-white-constant: #FFFFFF;
-    --color-icon: #9D9FAB;
-    --color-dark: #FAFAFA;
-    --color-secondary-text: #CCCCCC;
-    --color-black: #000000;
-    --color-transparent: transparent;
-    --color-modal-overlay: rgba(0, 0, 0, 0.5);
-    
-    /* Legacy variables for compatibility */
-    --background: var(--color-background);
-    --foreground: var(--color-dark);
-  }
 }
 
 body {

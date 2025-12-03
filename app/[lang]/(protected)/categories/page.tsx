@@ -1,14 +1,6 @@
-'use client';
-
-import { use } from 'react';
 import { Typography } from '@/shared/ui/Typography/Typography';
 
-interface CategoriesPageProps {
-  params: Promise<{ lang: string }>;
-}
-
-export default function CategoriesPage({ params }: CategoriesPageProps) {
-  const { lang } = use(params);
+export default function CategoriesPage() {
   return (
     <div 
       className="min-h-screen flex items-center justify-center"

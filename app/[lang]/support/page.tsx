@@ -1,16 +1,9 @@
 'use client';
-
-import { use } from 'react';
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import styles from "./support.module.css";
 
-interface SupportPageProps {
-  params: Promise<{ lang: string }>;
-}
-
-export default function SupportPage({ params }: SupportPageProps) {
-  const { lang } = use(params);
-  const { t } = useTranslation('support');
+export default function SupportPage() {
+  const t = useTranslations('support');
 
   return (
     <div className={styles.container}>

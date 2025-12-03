@@ -53,7 +53,10 @@
       "title": "Confirm phone number",
       "subtitle": "Enter the code from SMS",
       "resendTimer": "Resend code in",
-      "resendButton": "Resend code"
+      "resendButton": "Resend code",
+      "validation": {
+        "required": "Code is required"
+      }
     },
     "userType": {
       "title": "For yourself or for business?",

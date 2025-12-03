@@ -1,31 +1,18 @@
-'use client';
-
-import { useEffect, use } from 'react';
-import { useRouter } from 'next/navigation';
-import { secureStorage } from '@/utils/storage';
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 interface HomePageProps {
   params: Promise<{ lang: string }>;
 }
-
-export default function HomePage({ params }: HomePageProps) {
-  const router = useRouter();
-  const { lang } = use(params);
-
-  useEffect(() => {
-    const token = secureStorage.getItem('token');
-    
-    if (token) {
-      router.replace(`/${lang}/categories`);
-    } else {
-      router.replace(`/${lang}/login`);
-    }
-  }, [lang, router]);
-
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div>Loading...</div>
-    </div>
-  );
+export default async function HomePage({ params }: HomePageProps) {
+  const { lang } = await params;
+  const cookieStore = await cookies();
+  const token = cookieStore.get('token')?.value;
+  
+  if (token) {
+    redirect(`/${lang}/categories/`);
+  } else {
+    redirect(`/${lang}/login/`);
+  }
 }
 
