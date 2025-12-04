@@ -1,7 +1,7 @@
 'use client';
 
 import { LogoMini } from '@/shared/icons/LogoMini';
-import styles from './loading.module.css';
+import styles from './Loading.module.css';
 import { useTheme } from '@/shared/contexts/ThemeProvider';
 
 export default function Loading() {

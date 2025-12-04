@@ -45,6 +45,12 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   };
 
   const handleLanguageSelect = (newLocale: string) => {
+    // Если выбран уже текущий язык, просто закрываем меню
+    if (newLocale === currentLocale) {
+      setIsLanguageMenuOpen(false);
+      return;
+    }
+    
     setIsLanguageMenuOpen(false);
     
     setLocaleInStorage(newLocale);

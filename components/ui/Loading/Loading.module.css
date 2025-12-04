@@ -22,7 +22,7 @@
 
 .logo {
   display: block;
-  animation: float 3s ease-in-out infinite;
+  transform: scale(2);
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 }
 
@@ -34,15 +34,6 @@
   50% {
     transform: scale(1.08);
     opacity: 0.85;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: scale(1.7) translateY(0px);
-  }
-  50% {
-    transform: scale(1.7) translateY(-12px);
   }
 }
 

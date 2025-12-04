@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { SWRConfig } from 'swr';
 import { swrFetcher } from '@/lib/api/fetcher';
-import Loading from '@/app/[lang]/loading';
+import Loading from '@/components/ui/Loading/Loading';
 
 interface GlobalLoadingContextType {
   isLoading: boolean;
