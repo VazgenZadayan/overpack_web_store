@@ -1,9 +1,7 @@
 import useSWR from 'swr';
-import { getProductList } from '@/lib/api/products';
 import type { IGetProductListResponse } from '@/shared/types/products';
 
 interface UseProductsParams {
-  language: string;
   categoryId: string | null;
   subCategoryId?: string;
   brandId?: string;
@@ -12,19 +10,29 @@ interface UseProductsParams {
 }
 
 export function useProducts(params: UseProductsParams) {
+  const { categoryId, subCategoryId, brandId, size, search } = params;
+  
+  if (!categoryId) {
+    return {
+      data: undefined,
+      isLoading: false,
+      isError: null,
+      mutate: async () => {},
+    };
+  }
+  
+  const searchParams = new URLSearchParams();
+  searchParams.set('categoryId', categoryId);
+  if (subCategoryId) searchParams.set('subCategoryId', subCategoryId);
+  if (brandId) searchParams.set('brandId', brandId);
+  if (size) searchParams.set('size', size.toString());
+  searchParams.set('search', search);
+  
+  const queryString = searchParams.toString();
+  const key = `/product/search?${queryString}`;
+
   const { data, error, isLoading, mutate } = useSWR<IGetProductListResponse>(
-    params.language && params.categoryId
-      ? [
-          'products',
-          params.language,
-          params.categoryId,
-          params.subCategoryId,
-          params.brandId,
-          params.size,
-          params.search,
-        ]
-      : null,
-    () => getProductList({ ...params, categoryId: params.categoryId! }),
+    key,
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
@@ -39,4 +47,3 @@ export function useProducts(params: UseProductsParams) {
     mutate,
   };
 }
-

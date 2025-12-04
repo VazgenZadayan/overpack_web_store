@@ -24,16 +24,14 @@ export function CategoryView({
 }: CategoryViewProps) {
   const router = useRouter();
 
-  const { data: categoriesData } = useCategories(language);
+  const { data: categoriesData } = useCategories();
   const category = categoriesData?.data.categories.find((c) => c.id === categoryId);
 
   const { data: brandsData, isLoading: isBrandsLoading } = useBrands(
-    language,
     categoryId ? categoryId.toString() : null
   );
 
   const { data: subCategoriesData, isLoading: isSubCategoriesLoading } = useSubCategories(
-    language,
     categoryId ? categoryId.toString() : null
   );
 

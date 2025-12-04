@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Typography } from '@/shared/ui/Typography/Typography';
 import { createSlugSegment } from '@/utils/slug';
 import styles from './CategoryCard.module.css';
 
@@ -43,37 +42,22 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
 
   return (
     <Link href={getHref()} className={styles.card}>
-      <div className={styles.iconWrapper}>
+      <div className={styles.imageContainer}>
         <Image
           src={image}
           alt={title}
-          width={200}
-          height={200}
-          className={styles.icon}
+          width={280}
+          height={280}
+          className={styles.image}
           unoptimized
         />
       </div>
-      <div className={styles.textWrapper}>
-        <Typography variant="bodyLBold">{title}</Typography>
-      </div>
-      <div className={styles.arrowContainer}>
-        <svg
-          width="21"
-          height="21"
-          viewBox="0 0 21 21"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8 5L13 10.5L8 16"
-            stroke="var(--color-dark)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+
+      <div className={styles.overlay} />
+
+      <div className={styles.content}>
+        <h3 className={styles.title}>{title}</h3>
       </div>
     </Link>
   );
 };
-

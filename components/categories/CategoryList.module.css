@@ -1,8 +1,7 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
 .loading,
@@ -10,7 +9,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 200px;
-  padding: 16px;
+  min-height: 400px;
+  color: var(--color-secondary-text);
+  font-size: 16px;
+  font-weight: 400;
 }
 
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+  }
+}

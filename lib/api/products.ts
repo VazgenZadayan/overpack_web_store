@@ -1,5 +1,5 @@
-import { API } from '@/lib/constants';
 import { formatPrice } from '@/utils/helpers';
+import { fetcher } from './fetcher';
 import type {
   IGetCategoriesResponse,
   IGetSubCategoriesResponse,
@@ -9,61 +9,17 @@ import type {
   IProduct,
 } from '@/shared/types/products';
 
-async function fetchAPI<T>(
-  url: string,
-  language: string,
-  options?: RequestInit
-): Promise<T> {
-  const token = typeof document !== 'undefined' 
-    ? getCookie('token') 
-    : null;
-
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    ...(token && { token }),
-  };
-
-  const apiLanguage = language === 'hy' ? 'am' : language;
-  headers['Accept-Language'] = apiLanguage;
-
-  const response = await fetch(`${API}${url}`, {
-    ...options,
-    headers: {
-      ...headers,
-      ...options?.headers,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`API error: ${response.statusText}`);
-  }
-
-  return response.json();
-}
-
-function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') return null;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return parts.pop()?.split(';').shift() || null;
-  }
-  return null;
-}
-
-export async function getCategories(language: string): Promise<IGetCategoriesResponse> {
-  return fetchAPI<IGetCategoriesResponse>('category', language, {
+export async function getCategories(): Promise<IGetCategoriesResponse> {
+  return fetcher<IGetCategoriesResponse>('/category', {
     method: 'GET',
   });
 }
 
 export async function getSubCategories(
-  language: string,
   categoryId: string
 ): Promise<IGetSubCategoriesResponse> {
-  return fetchAPI<IGetSubCategoriesResponse>(
+  return fetcher<IGetSubCategoriesResponse>(
     `/category/subs?categoryId=${categoryId}`,
-    language,
     {
       method: 'GET',
     }
@@ -71,18 +27,15 @@ export async function getSubCategories(
 }
 
 export async function getBrands(
-  language: string,
   categoryId: string
 ): Promise<IGetBrandsResponse> {
-  const data = await fetchAPI<IGetBrandsResponse>(
+  const data = await fetcher<IGetBrandsResponse>(
     `/category/brands?categoryId=${categoryId}`,
-    language,
     {
       method: 'GET',
     }
   );
   
-  // Apply serializer logic
   return {
     ...data,
     data: {
@@ -95,7 +48,6 @@ export async function getBrands(
 }
 
 export async function getSizes(params: {
-  language: string;
   categoryId?: string;
   subCategoryId?: string;
   brandId?: string;
@@ -105,9 +57,8 @@ export async function getSizes(params: {
   if (params.subCategoryId) searchParams.set('subCategoryId', params.subCategoryId);
   if (params.brandId) searchParams.set('brandId', params.brandId);
 
-  return fetchAPI<IGetSizesResponse>(
-    `product/sizes?${searchParams.toString()}`,
-    params.language,
+  return fetcher<IGetSizesResponse>(
+    `/product/sizes?${searchParams.toString()}`,
     {
       method: 'GET',
     }
@@ -115,7 +66,6 @@ export async function getSizes(params: {
 }
 
 export async function getProductList(params: {
-  language: string;
   categoryId: string;
   subCategoryId?: string;
   brandId?: string;
@@ -129,9 +79,8 @@ export async function getProductList(params: {
   if (params.size) searchParams.set('size', params.size.toString());
   searchParams.set('search', params.search);
 
-  const data = await fetchAPI<IGetProductListResponse>(
-    `product/search?${searchParams.toString()}`,
-    params.language,
+  const data = await fetcher<IGetProductListResponse>(
+    `/product/search?${searchParams.toString()}`,
     {
       method: 'GET',
     }
@@ -148,10 +97,9 @@ export async function getProductList(params: {
   };
 }
 
-export async function getProductById(id: number, language: string): Promise<IProduct> {
-  const data = await fetchAPI<{ success: boolean; data: { product: IProduct } }>(
-    `product/${id}`,
-    language,
+export async function getProductById(id: number): Promise<IProduct> {
+  const data = await fetcher<{ success: boolean; data: { product: IProduct } }>(
+    `/product/${id}`,
     {
       method: 'GET',
     }

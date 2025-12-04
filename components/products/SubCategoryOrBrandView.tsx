@@ -24,12 +24,10 @@ export function SubCategoryOrBrandView({
   const router = useRouter();
 
   const { data: brandsData, isLoading: isBrandsLoading } = useBrands(
-    language,
     categoryId ? categoryId.toString() : null
   );
 
   const { data: subCategoriesData, isLoading: isSubCategoriesLoading } = useSubCategories(
-    language,
     categoryId ? categoryId.toString() : null
   );
 

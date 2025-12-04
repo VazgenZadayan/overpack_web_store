@@ -1,20 +1,25 @@
 import useSWR from 'swr';
-import { getSizes } from '@/lib/api/products';
 import type { IGetSizesResponse } from '@/shared/types/products';
 
 interface UseSizesParams {
-  language: string;
   categoryId?: string;
   subCategoryId?: string;
   brandId?: string;
 }
 
 export function useSizes(params: UseSizesParams) {
+  const { categoryId, subCategoryId, brandId } = params;
+  
+  const searchParams = new URLSearchParams();
+  if (categoryId) searchParams.set('categoryId', categoryId);
+  if (subCategoryId) searchParams.set('subCategoryId', subCategoryId);
+  if (brandId) searchParams.set('brandId', brandId);
+  
+  const queryString = searchParams.toString();
+  const key = queryString ? `/product/sizes?${queryString}` : null;
+
   const { data, error, isLoading, mutate } = useSWR<IGetSizesResponse>(
-    params.language && params.categoryId
-      ? ['sizes', params.language, params.categoryId, params.subCategoryId, params.brandId]
-      : null,
-    () => getSizes(params),
+    key,
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
@@ -29,4 +34,3 @@ export function useSizes(params: UseSizesParams) {
     mutate,
   };
 }
-

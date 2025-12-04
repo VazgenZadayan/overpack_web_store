@@ -434,5 +434,16 @@
       "text": "Monday - Sunday: 10:00 AM - 10:00 PM"
     },
     "additionalInfo": "Our support team is always ready to assist you with any questions about orders, delivery, products, or the app."
+  },
+  "Footer": {
+    "contacts": "Our contacts",
+    "downloadApp": "Download app",
+    "followUs": "Follow us",
+    "legal": "Legal",
+    "aboutUs": "About us",
+    "support": "Support",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use",
+    "allRightsReserved": "All rights reserved"
   }
 }

@@ -1,11 +1,9 @@
 import useSWR from 'swr';
-import { getSubCategories } from '@/lib/api/products';
 import type { IGetSubCategoriesResponse } from '@/shared/types/products';
 
-export function useSubCategories(language: string, categoryId: string | null) {
+export function useSubCategories(categoryId: string | null) {
   const { data, error, isLoading, mutate } = useSWR<IGetSubCategoriesResponse>(
-    language && categoryId ? ['subCategories', language, categoryId] : null,
-    () => getSubCategories(language, categoryId!),
+    categoryId ? `/category/subs?categoryId=${categoryId}` : null,
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
@@ -20,4 +18,3 @@ export function useSubCategories(language: string, categoryId: string | null) {
     mutate,
   };
 }
-

@@ -1,0 +1,159 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .header {
+  background-color: rgba(25, 28, 29, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logoIcon {
+  width: 130px;
+  height: 32px;
+}
+
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+
+.appButtons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.appStoreButton,
+.playStoreButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.85;
+  border-radius: 4px;
+}
+
+.appStoreButton:hover,
+.playStoreButton:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.appStoreButton:active,
+.playStoreButton:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+.appBadge {
+  height: 20px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background-color: var(--color-background);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .actions {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.profileButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-main) 0%, rgba(240, 51, 65, 0.8) 100%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-white-constant);
+  box-shadow: 0 2px 8px rgba(240, 51, 65, 0.2);
+}
+
+.initials {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-white-constant);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1024px) {
+  .appButtons {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+    gap: 16px;
+    height: 64px;
+  }
+
+  .logoIcon {
+    width: 130px;
+    height: 48px;
+  }
+
+  .rightSection {
+    gap: 12px;
+  }
+
+  .actions {
+    gap: 4px;
+    padding: 3px;
+  }
+
+  .actionButton,
+  .profileButton {
+    width: 36px;
+    height: 36px;
+  }
+}

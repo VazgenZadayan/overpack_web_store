@@ -10,7 +10,7 @@ interface CategoryListProps {
 }
 
 export function CategoryList({ language }: CategoryListProps) {
-  const { data, isLoading } = useCategories(language);
+  const { data, isLoading } = useCategories();
 
   if (isLoading) {
     return (

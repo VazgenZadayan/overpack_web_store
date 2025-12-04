@@ -19,7 +19,6 @@ interface ProductListProps {
 }
 
 export function ProductList({
-  language,
   categoryId,
   subCategoryId,
   brandId,
@@ -30,14 +29,12 @@ export function ProductList({
   const [activeSize, setActiveSize] = useState<number | undefined>(undefined);
 
   const { data: sizesData, isLoading: isSizesLoading } = useSizes({
-    language,
     categoryId,
     subCategoryId,
     brandId,
   });
 
   const { data: productsData, isLoading: isProductsLoading } = useProducts({
-    language,
     categoryId,
     subCategoryId,
     brandId,
