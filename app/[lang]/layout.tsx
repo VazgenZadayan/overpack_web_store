@@ -5,7 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { SWRProvider } from "@/lib/providers/SWRProvider";
+import { GlobalLoadingProvider } from "@/lib/providers/GlobalLoadingProvider";
 import { ThemeProvider, type ThemeType } from "@/shared/contexts/ThemeProvider";
 import { Toast } from "@/shared/ui/Toast/Toast";
 import "../globals.css";
@@ -85,14 +85,14 @@ export default async function LangLayout({
         <link rel="alternate" hrefLang="ru" href="https://overpack.am/ru/" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <SWRProvider>
-          <NextIntlClientProvider messages={messages}>
             <ThemeProvider initialTheme={savedTheme}>
+        <GlobalLoadingProvider>
+          <NextIntlClientProvider messages={messages}>
               {children}
               <Toast />
-            </ThemeProvider>
           </NextIntlClientProvider>
-        </SWRProvider>
+        </GlobalLoadingProvider>
+            </ThemeProvider>
       </body>
     </html>
   );

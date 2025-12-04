@@ -1,0 +1,48 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  z-index: 9999;
+}
+
+[data-theme='dark'] .container {
+  background-color: #191c1d;
+}
+
+.logoWrapper {
+  animation: pulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.logo {
+  display: block;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.85;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: scale(1.7) translateY(0px);
+  }
+  50% {
+    transform: scale(1.7) translateY(-12px);
+  }
+}
+
