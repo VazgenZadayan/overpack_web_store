@@ -53,13 +53,38 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Hide scrollbar for react-international-phone dropdown */
+/* Custom scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-icon) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-icon);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-secondary-text);
+}
+
 .react-international-phone-country-selector-dropdown {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .react-international-phone-country-selector-dropdown::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
