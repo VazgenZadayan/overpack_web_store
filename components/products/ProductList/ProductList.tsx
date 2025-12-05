@@ -3,20 +3,13 @@
 import { useState, useEffect, useMemo, startTransition } from 'react';
 import { useProducts } from '@/lib/hooks/useProducts';
 import { useSizes } from '@/lib/hooks/useSizes';
-import { ProductCard } from './ProductCard';
+import { ProductCard } from '../ProductCard/ProductCard';
 import { FilterInput } from '@/shared/ui/FilterInput/FilterInput';
 import { Tabs } from '@/shared/ui/Tabs/Tabs';
-import { Typography } from '@/shared/ui/Typography/Typography';
 import { debounce } from '@/utils/helpers';
 import { useTranslations } from 'next-intl';
+import { ProductListProps } from './types';
 import styles from './ProductList.module.css';
-
-interface ProductListProps {
-  language: string;
-  categoryId: string;
-  subCategoryId?: string;
-  brandId?: string;
-}
 
 export function ProductList({
   categoryId,
@@ -28,13 +21,13 @@ export function ProductList({
   const [search, setSearch] = useState('');
   const [activeSize, setActiveSize] = useState<number | undefined>(undefined);
 
-  const { data: sizesData, isLoading: isSizesLoading } = useSizes({
+  const { data: sizesData } = useSizes({
     categoryId,
     subCategoryId,
     brandId,
   });
 
-  const { data: productsData, isLoading: isProductsLoading } = useProducts({
+  const { data: productsData } = useProducts({
     categoryId,
     subCategoryId,
     brandId,
@@ -51,9 +44,12 @@ export function ProductList({
   }, [sizesData?.data.sizes, activeSize]);
 
   const debouncedSetSearch = useMemo(
-    () => debounce((text: string) => {
-      setSearch(text);
-    }, 400),
+    () => {
+      const setSearchDebounced = (text: string) => {
+        setSearch(text);
+      };
+      return debounce(setSearchDebounced as (...args: unknown[]) => void, 400) as (text: string) => void;
+    },
     []
   );
 
@@ -63,7 +59,6 @@ export function ProductList({
   };
 
   const handleProductClick = () => {
-    // TODO: Navigate to product detail page
   };
 
   const products = productsData?.data.products || [];
@@ -80,37 +75,27 @@ export function ProductList({
           tabs={sizesData?.data.sizes}
           activeTab={activeSize}
           onTabChange={setActiveSize}
-          isLoading={isSizesLoading}
-          unit={t('units.millimeters') || 'mm'}
+          isLoading={false}
+          unit={brandId ? t('units.grams') : t('units.millimeters')}
         />
       </div>
 
-      {isProductsLoading ? (
-        <div className={styles.loading}>
-          <Typography variant="bodyMMed">Loading products...</Typography>
-        </div>
-      ) : products.length === 0 ? (
-        <div className={styles.empty}>
-          <Typography variant="bodyMMed" textAlign="center">
-            No products found
-          </Typography>
-        </div>
-      ) : (
-        <div className={styles.grid}>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              price={product.price}
-              image={product.image}
-              size={product.size}
-              quantity={product.quantity}
-              onClick={handleProductClick}
-            />
-          ))}
-        </div>
-      )}
+      <div className={styles.grid}>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            price={product.price}
+            image={product.image}
+            size={product.size}
+            quantity={product.quantity}
+            description={product.description}
+            createdAt={product.createdAt}
+            onClick={handleProductClick}
+          />
+        ))}
+      </div>
     </>
   );
 }

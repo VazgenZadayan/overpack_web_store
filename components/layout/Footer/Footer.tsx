@@ -8,11 +8,8 @@ import { useTheme } from '@/shared/contexts/ThemeProvider';
 import { Phone, Mail, Facebook, Instagram } from 'lucide-react';
 import { LogoMini } from '@/shared/icons/LogoMini';
 import { getDeviceType } from '@/utils/device';
+import { FooterProps } from './types';
 import styles from './Footer.module.css';
-
-interface FooterProps {
-  locale: string;
-}
 
 export const Footer: React.FC<FooterProps> = ({ locale }) => {
   const t = useTranslations('Footer');

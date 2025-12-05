@@ -1,5 +1,6 @@
 import { extractIdFromSlug } from '@/utils/slug';
-import { CategoryView } from '@/components/categories/CategoryView';
+import { CategoryView } from '@/components/categories/CategoryView/CategoryView';
+import styles from '../categories.module.css';
 
 export default async function CategoryPage({
   params,
@@ -7,21 +8,20 @@ export default async function CategoryPage({
   params: Promise<{ lang: string; categorySlug: string }>;
 }) {
   const { lang, categorySlug } = await params;
-  const categoryId = extractIdFromSlug(categorySlug);
-
-  if (!categoryId) {
-    return (
-      <div>
-        <p>Invalid category</p>
-      </div>
-    );
-  }
+  const categoryId = extractIdFromSlug(categorySlug) || 0;
 
   return (
-    <CategoryView
-      language={lang}
-      categoryId={categoryId}
-      categorySlug={categorySlug}
-    />
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.content}>
+          <CategoryView 
+            language={lang} 
+            categoryId={categoryId}
+            categorySlug={categorySlug}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
+

@@ -1,30 +1,31 @@
 import { extractIdFromSlug } from '@/utils/slug';
-import { SubCategoryOrBrandView } from '@/components/products/SubCategoryOrBrandView';
+import { CategoryItemView } from '@/components/categories/CategoryItemView/CategoryItemView';
+import styles from '../../categories.module.css';
 
-export default async function SubCategoryOrBrandPage({
+export default async function CategoryItemPage({
   params,
 }: {
   params: Promise<{ lang: string; categorySlug: string; subSlug: string }>;
 }) {
   const { lang, categorySlug, subSlug } = await params;
   const categoryId = extractIdFromSlug(categorySlug);
-  const subId = extractIdFromSlug(subSlug);
+  const itemId = extractIdFromSlug(subSlug);
 
-  if (!categoryId || !subId) {
-    return (
-      <div>
-        <p>Invalid category or subcategory/brand</p>
-      </div>
-    );
-  }
+  if (!categoryId || !itemId) return null;
 
   return (
-    <SubCategoryOrBrandView
-      language={lang}
-      categoryId={categoryId}
-      categorySlug={categorySlug}
-      subId={subId}
-      subSlug={subSlug}
-    />
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.content}>
+          <CategoryItemView
+            language={lang}
+            categoryId={categoryId}
+            itemId={itemId}
+            categorySlug={categorySlug}
+            itemSlug={subSlug}
+          />
+        </div>
+      </div>
+    </div>
   );
 }

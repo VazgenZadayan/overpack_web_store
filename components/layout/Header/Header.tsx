@@ -8,12 +8,8 @@ import { Logo } from '@/shared/icons/Logo';
 import { LanguageSwitcher } from '@/shared/ui/LanguageSwitcher';
 import { ThemeSwitcher } from '@/shared/ui/ThemeSwitcher';
 import { getInitials } from '@/utils/helpers';
+import { HeaderProps } from './types';
 import styles from './Header.module.css';
-
-interface HeaderProps {
-  locale: string;
-  userName?: string;
-}
 
 export const Header: React.FC<HeaderProps> = ({
   locale,
@@ -23,9 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
   const initials = userName ? getInitials(userName) : null;
 
   const handleProfileClick = () => {
-    // TODO: Navigate to profile or open menu
   };
-
 
   return (
     <header className={styles.header}>

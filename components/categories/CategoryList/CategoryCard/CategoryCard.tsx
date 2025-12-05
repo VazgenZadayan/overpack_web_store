@@ -4,18 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { createSlugSegment } from '@/utils/slug';
+import { CategoryCardProps } from './types';
 import styles from './CategoryCard.module.css';
-
-interface CategoryCardProps {
-  id: number;
-  title: string;
-  image: string;
-  brands: number;
-  subCategories: number;
-  locale: string;
-  subCategoryId?: number;
-  parentCategorySlug?: string;
-}
 
 export const CategoryCard: React.FC<CategoryCardProps> = ({
   id,
@@ -34,9 +24,6 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
       const subSlugSegment = createSlugSegment(subCategoryId, title);
       return `/${locale}/categories/${parentCategorySlug}/${subSlugSegment}`;
     }
-    if (brands > 0 || subCategories > 0) {
-      return `/${locale}/categories/${slugSegment}`;
-    }
     return `/${locale}/categories/${slugSegment}`;
   };
 
@@ -46,10 +33,9 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
         <Image
           src={image}
           alt={title}
-          width={280}
-          height={280}
+          width={50}
+          height={50}
           className={styles.image}
-          unoptimized
         />
       </div>
 
@@ -61,3 +47,4 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
     </Link>
   );
 };
+

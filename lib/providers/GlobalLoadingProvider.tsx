@@ -30,7 +30,7 @@ export function GlobalLoadingProvider({ children }: { children: React.ReactNode 
   }, []);
 
   useEffect(() => {
-    setIsMounted(false);
+    setIsMounted(true);
   }, []);
 
   return (

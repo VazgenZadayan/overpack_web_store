@@ -13,17 +13,12 @@
   transition: all 0.2s;
 }
 
-.tab:hover {
-  border-color: var(--color-main);
-}
-
 .tab.active {
   background-color: var(--color-main);
-  border-color: var(--color-main);
-  color: var(--color-white);
+  color: var(--color-white-constant);
 }
 
 .tab.active p {
-  color: var(--color-white);
+  color: var(--color-white-constant);
 }
 

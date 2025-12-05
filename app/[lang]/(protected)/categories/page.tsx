@@ -1,6 +1,4 @@
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { CategoryList } from '@/components/categories/CategoryList';
+import { CategoryList } from '@/components/categories/CategoryList/CategoryList';
 import styles from './categories.module.css';
 
 export default async function CategoriesPage({
@@ -12,13 +10,11 @@ export default async function CategoriesPage({
 
   return (
     <div className={styles.container}>
-      <Header locale={lang} />
-      <main className={styles.main}>
+      <div className={styles.main}>
         <div className={styles.content}>
           <CategoryList language={lang} />
         </div>
-      </main>
-      <Footer locale={lang} />
+      </div>
     </div>
   );
 }
