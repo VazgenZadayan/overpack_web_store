@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, startTransition } from 'react';
+import { useState, useMemo } from 'react';
 import { useProducts } from '@/lib/hooks/useProducts';
 import { useSizes } from '@/lib/hooks/useSizes';
 import { ProductCard } from '../ProductCard/ProductCard';
@@ -25,27 +25,32 @@ export function ProductList({
   const [search, setSearch] = useState('');
   const [activeSize, setActiveSize] = useState<number | undefined>(undefined);
 
-  const { data: sizesData } = useSizes({
+  const { data: sizesData, isLoading: isSizesLoading } = useSizes({
     categoryId,
     subCategoryId,
     brandId,
   });
 
-  const { data: productsData, isError, mutate } = useProducts({
+  const computedSize = useMemo(() => {
+    if (isSizesLoading) {
+      return undefined;
+    }
+    if (activeSize !== undefined) {
+      return activeSize;
+    }
+    if (sizesData?.data.sizes.length) {
+      return sizesData.data.sizes[0];
+    }
+    return undefined;
+  }, [sizesData?.data.sizes, activeSize, isSizesLoading]);
+
+  const { data: productsData, isError, mutate, isLoading: isProductsLoading } = useProducts({
     categoryId,
     subCategoryId,
     brandId,
-    size: activeSize,
+    size: computedSize,
     search,
   });
-
-  useEffect(() => {
-    if (sizesData?.data.sizes.length && activeSize === undefined) {
-      startTransition(() => {
-        setActiveSize(sizesData.data.sizes[0]);
-      });
-    }
-  }, [sizesData?.data.sizes, activeSize]);
 
   const debouncedSetSearch = useMemo(
     () => {
@@ -68,9 +73,10 @@ export function ProductList({
   const handleRetry = () => {
     mutate();
   };
-
-  const products = productsData?.data.products || [];
-  const hasProducts = products.length > 0;
+  const hasSearchInput = inputValue.trim() !== '';
+  const hasActiveSearch = search.trim() !== '';
+  const shouldShowFilters = !!productsData?.data.products.length || hasSearchInput || hasActiveSearch;
+  const shouldShowEmptyState = !isProductsLoading && !productsData?.data.products.length;
 
   if (isError) {
     return (
@@ -85,7 +91,7 @@ export function ProductList({
 
   return (
     <>
-      {hasProducts && (
+      {shouldShowFilters && (
         <div className={styles.filters}>
           <FilterInput
             placeholder={t('search') || 'Search...'}
@@ -94,7 +100,7 @@ export function ProductList({
           />
             <Tabs
               tabs={sizesData?.data.sizes}
-              activeTab={activeSize}
+              activeTab={computedSize}
               onTabChange={setActiveSize}
               isLoading={false}
               unit={brandId ? t('units.grams') : t('units.millimeters')}
@@ -102,14 +108,14 @@ export function ProductList({
         </div>
       )}
 
-      {!hasProducts ? (
+      {shouldShowEmptyState ? (
         <EmptyState
           title={tEmpty('title')}
           description={tEmpty('description')}
         />
       ) : (
         <div className={styles.grid}>
-          {products.map((product) => (
+          {productsData?.data.products.map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
