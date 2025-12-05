@@ -11,8 +11,6 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
   id,
   title,
   image,
-  brands,
-  subCategories,
   locale,
   subCategoryId,
   parentCategorySlug,

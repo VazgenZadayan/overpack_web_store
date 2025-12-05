@@ -1,5 +1,6 @@
 import { extractIdFromSlug } from '@/utils/slug';
 import { CategoryItemView } from '@/components/categories/CategoryItemView/CategoryItemView';
+import { FloatingCart } from '@/components/cart/FloatingCart/FloatingCart';
 import styles from '../../categories.module.css';
 
 export default async function CategoryItemPage({
@@ -26,6 +27,7 @@ export default async function CategoryItemPage({
           />
         </div>
       </div>
+      <FloatingCart />
     </div>
   );
 }

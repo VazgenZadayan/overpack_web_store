@@ -12,11 +12,19 @@ export function debounce<T extends (...args: unknown[]) => void>(
 }
 
 export const formatPrice = (price: string | number): string => {
-  const str = String(price);
-  if (str.includes('.') && /^0+$/.test(str.split('.')[1])) {
-    return str.split('.')[0];
+  const num = typeof price === 'string' ? parseFloat(price) : price;
+  
+  if (isNaN(num)) {
+    return String(price);
   }
-  return str;
+  const integerPart = Math.floor(num);
+  const hasDecimal = num % 1 !== 0;
+    const formatted = integerPart.toLocaleString('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: hasDecimal ? 2 : 0,
+  });
+
+  return formatted;
 };
 
 export const getInitials = (name?: string): string => {

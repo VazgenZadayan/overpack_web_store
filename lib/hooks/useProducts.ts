@@ -12,24 +12,17 @@ interface UseProductsParams {
 export function useProducts(params: UseProductsParams) {
   const { categoryId, subCategoryId, brandId, size, search } = params;
   
-  if (!categoryId) {
-    return {
-      data: undefined,
-      isLoading: false,
-      isError: null,
-      mutate: async () => {},
-    };
+  const searchParams = new URLSearchParams();
+  if (categoryId) {
+    searchParams.set('categoryId', categoryId);
+    if (subCategoryId) searchParams.set('subCategoryId', subCategoryId);
+    if (brandId) searchParams.set('brandId', brandId);
+    if (size) searchParams.set('size', size.toString());
+    searchParams.set('search', search);
   }
   
-  const searchParams = new URLSearchParams();
-  searchParams.set('categoryId', categoryId);
-  if (subCategoryId) searchParams.set('subCategoryId', subCategoryId);
-  if (brandId) searchParams.set('brandId', brandId);
-  if (size) searchParams.set('size', size.toString());
-  searchParams.set('search', search);
-  
   const queryString = searchParams.toString();
-  const key = `/product/search?${queryString}`;
+  const key = categoryId ? `/product/search?${queryString}` : null;
 
   const { data, error, isLoading, mutate } = useSWR<IGetProductListResponse>(
     key,

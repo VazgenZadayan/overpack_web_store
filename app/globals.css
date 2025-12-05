@@ -53,6 +53,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body.cart-page-no-scroll {
+  overflow: hidden !important;
+}
+
 /* Custom scrollbar styles */
 * {
   scrollbar-width: thin;

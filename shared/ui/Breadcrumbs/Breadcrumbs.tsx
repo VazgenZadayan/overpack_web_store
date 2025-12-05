@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react';
 import { BreadcrumbsProps } from './types';
 import styles from './Breadcrumbs.module.css';
 
-export function Breadcrumbs({ items, locale }: BreadcrumbsProps) {
+export function Breadcrumbs({ items }: BreadcrumbsProps) {
   if (!items || items.length === 0) {
     return null;
   }

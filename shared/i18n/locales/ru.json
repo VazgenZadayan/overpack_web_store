@@ -127,7 +127,7 @@
     "title": "Корзина",
     "select": "Выбрать",
     "cancel": "Отмена",
-    "selectAll": "Выбрать все ({{count}})",
+    "selectAll": "Выбрать все:",
     "selected": "Выбрано:",
     "delivery": "Доставка ~{{price}} ֏",
     "deliveryNoAddress": "Введите адрес",
@@ -139,14 +139,26 @@
     "courierNotFound": "Не можем найти курьера...",
     "next": "Далее",
     "checkout": "Оформить",
+    "total": "Сумма",
     "deliveryEmpty": "Без товаров курьер не выезжает",
     "openCart": "Открыть корзину",
     "closeCart": "Закрыть",
+    "goToShopping": "Перейти к покупкам",
+    "empty": {
+      "title": "Корзина пуста",
+      "description": "Добавьте товары в корзину, чтобы продолжить покупки"
+    },
     "deleteSelectedModal": {
       "title": "Удалить выбранные товары?",
       "helpText": "Вы уверены, что хотите удалить выбранные товары?",
       "okButton": "Удалить",
       "cancelButton": "Отмена"
+    },
+    "deleteItemModal": {
+      "title": "Удалить товар?",
+      "helpText": "Вы действительно хотите удалить этот товар?",
+      "okButton": "Да",
+      "cancelButton": "Нет"
     },
     "cartChanged": {
       "title": "Состав корзины изменился",

@@ -127,7 +127,7 @@
     "title": "Զամբյուղ",
     "select": "Ընտրել",
     "cancel": "Չեղարկել",
-    "selectAll": "Ընտրել բոլորը ({{count}})",
+    "selectAll": "Ընտրել բոլորը: ",
     "selected": "Ընտրված է:",
     "delivery": "Առաքում ~{{price}} ֏",
     "deliveryNoAddress": "Հասցե գրել",
@@ -139,14 +139,26 @@
     "courierNotFound": "Չենք կարող գտնել առաքիչ...",
     "next": "Հաջորդ",
     "checkout": "Պատվիրել",
+    "total": "Ընդամենը",
     "deliveryEmpty": "Առաքիչը առանց ապրանքների չի մեկնում",
     "openCart": "Բացել զամբյուղը",
     "closeCart": "Փակել",
+    "goToShopping": "Գնալ գնումների",
+    "empty": {
+      "title": "Զամբյուղը դատարկ է",
+      "description": "Ավելացրեք ապրանքներ զամբյուղում շարունակելու համար"
+    },
     "deleteSelectedModal": {
       "title": "Ջնջե՞լ ընտրված ապրանքները",
       "helpText": "Վստա՞հ եք, որ ցանկանում եք ջնջել ընտրված ապրանքները",
       "okButton": "Ջնջել",
       "cancelButton": "Չեղարկել"
+    },
+    "deleteItemModal": {
+      "title": "Ջնջե՞լ ապրանքը",
+      "helpText": "Իսկապե՞ս ցանկանում եք ջնջել այս ապրանքը",
+      "okButton": "Այո",
+      "cancelButton": "Ոչ"
     },
     "cartChanged": {
       "title": "Զամբյուղի պարունակությունը փոխվել է",

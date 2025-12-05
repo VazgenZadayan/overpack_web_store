@@ -111,3 +111,25 @@ export async function getProductById(id: number): Promise<IProduct> {
   };
 }
 
+export async function getProductsByIds(ids: number[]): Promise<IGetProductListResponse> {
+  const searchParams = new URLSearchParams();
+  ids.forEach((id) => searchParams.append('ids', id.toString()));
+
+  const data = await fetcher<IGetProductListResponse>(
+    `/product/byIds?${searchParams.toString()}`,
+    {
+      method: 'GET',
+    }
+  );
+
+  return {
+    ...data,
+    data: {
+      products: data.data.products.map((product) => ({
+        ...product,
+        price: formatPrice(product.price),
+      })),
+    },
+  };
+}
+

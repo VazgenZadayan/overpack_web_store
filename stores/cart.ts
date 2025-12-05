@@ -4,6 +4,7 @@ import { ICartItem } from '@/shared/types/cart';
 
 interface CartState {
   items: ICartItem[];
+  totalItems: number;
   addToCart: (item: ICartItem) => void;
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
@@ -13,34 +14,43 @@ interface CartState {
   setCart: (items: ICartItem[]) => void;
 }
 
+const calculateTotalItems = (items: ICartItem[]): number => {
+  return items.reduce((sum, item) => sum + item.countInCart, 0);
+};
+
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       items: [],
+      totalItems: 0,
       addToCart: (item) =>
         set((state) => {
           const index = state.items.findIndex((i) => i.id === item.id);
+          let newItems: ICartItem[];
           if (index !== -1) {
-            const newItems = [...state.items];
+            newItems = [...state.items];
             newItems[index] = {
               ...newItems[index],
               countInCart: newItems[index].countInCart + 1,
             };
-            return { items: newItems };
+          } else {
+            newItems = [...state.items, { ...item, countInCart: 1 }];
           }
-          return { items: [...state.items, { ...item, countInCart: 1 }] };
+          return { items: newItems, totalItems: calculateTotalItems(newItems) };
         }),
       removeFromCart: (id) =>
-        set((state) => ({
-          items: state.items.filter((item) => item.id !== id),
-        })),
+        set((state) => {
+          const newItems = state.items.filter((item) => item.id !== id);
+          return { items: newItems, totalItems: calculateTotalItems(newItems) };
+        }),
       updateQuantity: (id, quantity) =>
-        set((state) => ({
-          items: state.items.map((item) =>
+        set((state) => {
+          const newItems = state.items.map((item) =>
             item.id === id ? { ...item, countInCart: quantity } : item
-          ),
-        })),
-      clearCart: () => set({ items: [] }),
+          );
+          return { items: newItems, totalItems: calculateTotalItems(newItems) };
+        }),
+      clearCart: () => set({ items: [], totalItems: 0 }),
       batchAddToCart: (items) =>
         set((state) => {
           const newItems = [...state.items];
@@ -55,7 +65,7 @@ export const useCartStore = create<CartState>()(
               newItems.push({ ...item, countInCart: 1 });
             }
           });
-          return { items: newItems };
+          return { items: newItems, totalItems: calculateTotalItems(newItems) };
         }),
       mergeCartItems: (items) =>
         set((state) => {
@@ -71,13 +81,18 @@ export const useCartStore = create<CartState>()(
               newItems.push(item);
             }
           });
-          return { items: newItems };
+          return { items: newItems, totalItems: calculateTotalItems(newItems) };
         }),
-      setCart: (items) => set({ items }),
+      setCart: (items) => set({ items, totalItems: calculateTotalItems(items) }),
     }),
     {
       name: 'cart-storage',
       partialize: (state) => ({ items: state.items }),
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          state.totalItems = calculateTotalItems(state.items);
+        }
+      },
     }
   )
 );

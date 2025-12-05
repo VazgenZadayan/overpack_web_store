@@ -1,4 +1,5 @@
 import { CategoryList } from '@/components/categories/CategoryList/CategoryList';
+import { FloatingCart } from '@/components/cart/FloatingCart/FloatingCart';
 import styles from './categories.module.css';
 
 export default async function CategoriesPage({
@@ -15,6 +16,7 @@ export default async function CategoriesPage({
           <CategoryList language={lang} />
         </div>
       </div>
+      <FloatingCart />
     </div>
   );
 }

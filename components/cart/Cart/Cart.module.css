@@ -1,0 +1,236 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 180px);
+  height: calc(100vh - 180px);
+  flex: 1;
+  overflow: scroll;
+  padding-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.title {
+  color: var(--color-dark);
+}
+
+.actionButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.actionText {
+  color: var(--color-main);
+}
+
+.bulkActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-white);
+  z-index: 10;
+  border-bottom: 1px solid var(--color-gray);
+  margin-bottom: 8px;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.selectAllButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.selectAllText {
+  color: var(--color-dark);
+}
+
+.selectionInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.selectedTextWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+.selectedLabel {
+  color: var(--color-dark);
+}
+
+.selectedCount {
+  color: var(--color-main);
+}
+
+.deleteSelectedButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-main);
+  padding: 0;
+  border-radius: 8px;
+  transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  min-width: 40px;
+}
+
+.deleteSelectedButton:hover {
+  background-color: var(--color-gray);
+  transform: scale(1.1);
+}
+
+.deleteSelectedButton:active {
+  transform: scale(0.95);
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 4px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.itemsList::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-gray);
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.totalLabel {
+  color: var(--color-secondary-text);
+}
+
+.totalPrice {
+  color: var(--color-dark);
+  white-space: nowrap;
+}
+
+.checkoutButton {
+  flex-shrink: 0;
+  min-width: 160px;
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+}
+
+.dialogTitle {
+  color: var(--color-dark);
+}
+
+.dialogHelpText {
+  color: var(--color-secondary-text);
+}
+
+.dialogActions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.dialogButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .footer {
+    max-width: 800px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
