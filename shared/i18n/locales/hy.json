@@ -14,8 +14,10 @@
       "history": "Իմ պատվերները",
       "theme": "Արտաքին տեսք",
       "contactUs": "Կապ մեզ հետ",
-      "partnersTitle": "Մեր գործընկերները"
+      "partnersTitle": "Մեր գործընկերները",
+      "aboutUs": "Մեր մասին"
     },
+    "inn": "ՀՎՀՀ",
     "logoutButton": "Դուրս գալ",
     "deleteAccountButton": "Ջնջել հաշիվը",
     "deleteAccount": {

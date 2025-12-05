@@ -14,8 +14,10 @@
       "history": "Мои заказы",
       "theme": "Тема",
       "contactUs": "Связаться с нами",
-      "partnersTitle": "Наши партнеры"
+      "partnersTitle": "Наши партнеры",
+      "aboutUs": "О нас"
     },
+    "inn": "ИНН",
     "logoutButton": "Выйти",
     "deleteAccountButton": "Удалить аккаунт",
     "deleteAccount": {

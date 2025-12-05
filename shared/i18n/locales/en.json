@@ -14,8 +14,10 @@
       "history": "My Orders",
       "theme": "Theme",
       "contactUs": "Contact us",
-      "partnersTitle": "Our partners"
+      "partnersTitle": "Our partners",
+      "aboutUs": "About us"
     },
+    "inn": "TIN",
     "logoutButton": "Logout",
     "deleteAccountButton": "Delete Account",
     "deleteAccount": {
