@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px 20px 15px;
+  text-align: center;
+  min-height: 300px;
+}
+
+.lottieContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 350px;
+  height: 250px;
+}
+
+.lottie {
+  width: 100%;
+  height: 100%;
+  margin-right: 35px;
+}
+
+.title {
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.description {
+  color: var(--color-secondary-text);
+  max-width: 400px;
+  text-align: center;
+}
+
+.actionContainer {
+  margin-top: 20px;
+}
+

@@ -447,5 +447,20 @@
     "privacyPolicy": "Privacy Policy",
     "termsOfUse": "Terms of Use",
     "allRightsReserved": "All rights reserved"
+  },
+  "EmptyState": {
+    "products": {
+      "title": "No products found",
+      "description": "There are no products in this category yet. Check back later or try another category."
+    },
+    "brands": {
+      "title": "No brands found",
+      "description": "There are no brands in this category yet. Check back later or try another category."
+    }
+  },
+  "ErrorState": {
+    "title": "Something went wrong",
+    "description": "We couldn't load the data. Please try again.",
+    "retryButton": "Try again"
   }
 }

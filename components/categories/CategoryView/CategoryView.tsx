@@ -9,7 +9,6 @@ import { SubCategoryList } from '../SubCategoryList/SubCategoryList';
 import { BrandList } from '../BrandList/BrandList';
 import { ProductList } from '@/components/products/ProductList/ProductList';
 import { CategoryViewProps } from './types';
-import styles from './CategoryView.module.css';
 
 export function CategoryView({ language, categoryId, categorySlug }: CategoryViewProps) {
   const t = useTranslations('CategoriesPage');

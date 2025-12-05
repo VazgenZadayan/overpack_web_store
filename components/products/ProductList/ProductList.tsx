@@ -6,6 +6,8 @@ import { useSizes } from '@/lib/hooks/useSizes';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { FilterInput } from '@/shared/ui/FilterInput/FilterInput';
 import { Tabs } from '@/shared/ui/Tabs/Tabs';
+import { EmptyState } from '@/shared/ui/EmptyState/EmptyState';
+import { ErrorState } from '@/shared/ui/ErrorState/ErrorState';
 import { debounce } from '@/utils/helpers';
 import { useTranslations } from 'next-intl';
 import { ProductListProps } from './types';
@@ -17,6 +19,8 @@ export function ProductList({
   brandId,
 }: ProductListProps) {
   const t = useTranslations('common');
+  const tEmpty = useTranslations('EmptyState.products');
+  const tError = useTranslations('ErrorState');
   const [inputValue, setInputValue] = useState('');
   const [search, setSearch] = useState('');
   const [activeSize, setActiveSize] = useState<number | undefined>(undefined);
@@ -27,7 +31,7 @@ export function ProductList({
     brandId,
   });
 
-  const { data: productsData } = useProducts({
+  const { data: productsData, isError, mutate } = useProducts({
     categoryId,
     subCategoryId,
     brandId,
@@ -61,41 +65,66 @@ export function ProductList({
   const handleProductClick = () => {
   };
 
+  const handleRetry = () => {
+    mutate();
+  };
+
   const products = productsData?.data.products || [];
+  const hasProducts = products.length > 0;
+
+  if (isError) {
+    return (
+      <ErrorState
+        title={tError('title')}
+        description={tError('description')}
+        onRetry={handleRetry}
+        retryLabel={tError('retryButton')}
+      />
+    );
+  }
 
   return (
     <>
-      <div className={styles.filters}>
-        <FilterInput
-          placeholder={t('search') || 'Search...'}
-          value={inputValue}
-          onChangeText={handleInputChange}
-        />
-        <Tabs
-          tabs={sizesData?.data.sizes}
-          activeTab={activeSize}
-          onTabChange={setActiveSize}
-          isLoading={false}
-          unit={brandId ? t('units.grams') : t('units.millimeters')}
-        />
-      </div>
-
-      <div className={styles.grid}>
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.title}
-            price={product.price}
-            image={product.image}
-            size={product.size}
-            quantity={product.quantity}
-            description={product.description}
-            createdAt={product.createdAt}
-            onClick={handleProductClick}
+      {hasProducts && (
+        <div className={styles.filters}>
+          <FilterInput
+            placeholder={t('search') || 'Search...'}
+            value={inputValue}
+            onChangeText={handleInputChange}
           />
-        ))}
-      </div>
+            <Tabs
+              tabs={sizesData?.data.sizes}
+              activeTab={activeSize}
+              onTabChange={setActiveSize}
+              isLoading={false}
+              unit={brandId ? t('units.grams') : t('units.millimeters')}
+            />
+        </div>
+      )}
+
+      {!hasProducts ? (
+        <EmptyState
+          title={tEmpty('title')}
+          description={tEmpty('description')}
+        />
+      ) : (
+        <div className={styles.grid}>
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              image={product.image}
+              size={product.size}
+              quantity={product.quantity}
+              description={product.description}
+              createdAt={product.createdAt}
+              onClick={handleProductClick}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }
