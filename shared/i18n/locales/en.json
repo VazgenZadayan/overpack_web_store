@@ -474,5 +474,47 @@
     "title": "Something went wrong",
     "description": "We couldn't load the data. Please try again.",
     "retryButton": "Try again"
+  },
+  "About": {
+    "title": "About us",
+    "subtitle": "Overpack",
+    "tagline": "Your trusted partner in the world of hookah",
+    "description": "Overpack is a modern online store for hookah products, where quality meets convenience. We offer a wide range of products from trusted manufacturers and guarantee fast delivery throughout Armenia.",
+    "mission": {
+      "title": "Our mission",
+      "text": "To provide our customers with only the best hookah products, ensuring a high level of service and individual approach to each order."
+    },
+    "company": {
+      "title": "About the company",
+      "name": "Private Entrepreneur",
+      "fullName": "Gagik Baghdasaryan Grigor",
+      "tin": "TIN: 28345959"
+    },
+    "values": {
+      "title": "Why choose us",
+      "quality": {
+        "title": "Quality",
+        "text": "Only original products from trusted manufacturers"
+      },
+      "service": {
+        "title": "Service",
+        "text": "Personal approach and support at every stage"
+      },
+      "speed": {
+        "title": "Speed",
+        "text": "Fast order processing and delivery"
+      },
+      "trust": {
+        "title": "Reliability",
+        "text": "Honesty and transparency in all relationships"
+      }
+    },
+    "contacts": {
+      "title": "Contacts",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "addressValue": "Republic of Armenia, 0048, Yerevan city, Norashen Street, Building No. 11, Apartment No. 54"
+    }
   }
 }
