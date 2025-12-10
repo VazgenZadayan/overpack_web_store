@@ -1,5 +1,4 @@
 import { Header } from '@/components/layout/Header/Header';
-import { Footer } from '@/components/layout/Footer/Footer';
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
@@ -16,7 +15,6 @@ export default async function ProtectedLayout({
     <>
       <Header locale={lang} />
       {children}
-      <Footer locale={lang} />
     </>
   );
 }

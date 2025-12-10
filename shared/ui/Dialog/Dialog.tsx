@@ -8,9 +8,11 @@ interface DialogProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
+  overlayClassName?: string;
 }
 
-export const Dialog: React.FC<DialogProps> = ({ isOpen, onClose, children }) => {
+export const Dialog: React.FC<DialogProps> = ({ isOpen, onClose, children, className, overlayClassName }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -52,8 +54,8 @@ export const Dialog: React.FC<DialogProps> = ({ isOpen, onClose, children }) => 
   };
 
   return createPortal(
-    <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+    <div className={`${styles.overlay} ${overlayClassName || ''}`} onClick={handleOverlayClick}>
+      <div className={`${styles.container} ${className || ''}`} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
     </div>,

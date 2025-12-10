@@ -169,6 +169,8 @@
   },
   "Address": {
     "title": "My addresses",
+    "newAddress": "New address",
+    "mainAddress": "Main",
     "addAddress": "Add address",
     "saveAddress": "Save address",
     "deleteAddress": "Delete address",
@@ -205,6 +207,10 @@
     "deleteErrorMessage": "Failed to delete address, please try again",
     "setMainErrorTitle": "Set error",
     "setMainErrorMessage": "Failed to set address as main, please try again"
+  },
+  "NoAddressesPage": {
+    "title": "No address — no hookah",
+    "subtitle": "Please provide a delivery address so we can continue."
   },
   "Order": {
     "title": "Order #{{number}}",

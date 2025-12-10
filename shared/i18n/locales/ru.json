@@ -168,6 +168,8 @@
   },
   "Address": {
     "title": "Мои адреса",
+    "newAddress": "Новый адрес",
+    "mainAddress": "Основной",
     "addAddress": "Добавить адрес",
     "saveAddress": "Сохранить адрес",
     "deleteAddress": "Удалить адрес",
@@ -203,6 +205,10 @@
     "deleteErrorMessage": "Не удалось удалить адрес, попробуйте еще раз",
     "setMainErrorTitle": "Ошибка установки",
     "setMainErrorMessage": "Не удалось установить адрес как основной, попробуйте еще раз"
+  },
+  "NoAddressesPage": {
+    "title": "Нет адреса — нет кальяна",
+    "subtitle": "Пожалуйста, укажи адрес доставки, чтобы мы могли продолжить."
   },
   "Order": {
     "title": "Заказ #{{number}}",

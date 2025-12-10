@@ -2,6 +2,7 @@ import { extractIdFromSlug } from '@/utils/slug';
 import { CategoryItemView } from '@/components/categories/CategoryItemView/CategoryItemView';
 import { FloatingCart } from '@/components/cart/FloatingCart/FloatingCart';
 import styles from '../../categories.module.css';
+import { Footer } from '@/components/layout/Footer/Footer';
 
 export default async function CategoryItemPage({
   params,
@@ -15,6 +16,7 @@ export default async function CategoryItemPage({
   if (!categoryId || !itemId) return null;
 
   return (
+    <>
     <div className={styles.container}>
       <div className={styles.main}>
         <div className={styles.content}>
@@ -29,5 +31,7 @@ export default async function CategoryItemPage({
       </div>
       <FloatingCart />
     </div>
+    <Footer locale={lang} />
+    </>
   );
 }

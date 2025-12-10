@@ -7,12 +7,14 @@ interface FilterInputProps {
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export const FilterInput: React.FC<FilterInputProps> = ({
   placeholder,
   value,
   onChangeText,
+  onKeyDown,
 }) => {
   const handleClear = () => {
     onChangeText('');
@@ -49,6 +51,7 @@ export const FilterInput: React.FC<FilterInputProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChangeText(e.target.value)}
+        onKeyDown={onKeyDown}
         className={styles.input}
       />
       {value && (

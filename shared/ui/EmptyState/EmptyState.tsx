@@ -47,7 +47,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         </div>
       )}
       {title && (
-        <Typography variant="h2" className={styles.title}>
+        <Typography variant="h2" className={styles.title} textAlign="center">
           {title}
         </Typography>
       )}

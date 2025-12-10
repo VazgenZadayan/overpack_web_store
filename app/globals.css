@@ -53,7 +53,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body.cart-page-no-scroll {
+body.cart-page-no-scroll,
+body.addresses-page-no-scroll {
   overflow: hidden !important;
 }
 
