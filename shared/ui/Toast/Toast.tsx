@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState, startTransition } from 'react';
+import { XCircle } from 'lucide-react';
 import { useToastStore } from '@/stores/toast';
 import { Typography } from '../Typography/Typography';
 import styles from './Toast.module.css';
 
 export function Toast() {
-  const { isVisible, title, message, autoHide, hideToast } = useToastStore();
+  const { isVisible, message, autoHide, hideToast, icon, onClose } = useToastStore();
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -21,6 +22,9 @@ export function Toast() {
             setIsAnimating(false);
           });
           setTimeout(() => {
+            if (onClose) {
+              onClose();
+            }
             hideToast();
           }, 300);
         }, 3000);
@@ -32,7 +36,17 @@ export function Toast() {
         setIsAnimating(false);
       });
     }
-  }, [isVisible, autoHide, hideToast]);
+  }, [isVisible, autoHide, hideToast, onClose]);
+
+  const handleClick = () => {
+    if (onClose) {
+      onClose();
+    }
+    setIsAnimating(false);
+    setTimeout(() => {
+      hideToast();
+    }, 300);
+  };
 
   if (!isVisible) {
     return null;
@@ -40,42 +54,11 @@ export function Toast() {
 
   return (
     <div className={`${styles.wrapper} ${isAnimating ? styles.visible : ''}`}>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <Typography variant="bodyMBold" className={styles.title}>
-            {title}
-          </Typography>
-          {message && (
-            <Typography variant="bodyMMed" className={styles.message}>
-              {message}
-            </Typography>
-          )}
-        </div>
-        <button
-          onClick={() => {
-            setIsAnimating(false);
-            setTimeout(() => {
-              hideToast();
-            }, 300);
-          }}
-          className={styles.closeButton}
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15 5L5 15M5 5L15 15"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+      <div className={styles.container} onClick={handleClick}>
+        {icon || <XCircle size={18} className={styles.icon} />}
+        <Typography variant="bodyMBold" className={styles.message}>
+          {message}
+        </Typography>
       </div>
     </div>
   );

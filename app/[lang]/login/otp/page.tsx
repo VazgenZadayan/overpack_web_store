@@ -125,7 +125,6 @@ export default function OTPPage({ params }: OTPPageProps) {
             errorTimeoutRef.current = null;
           }, 2000);
           showToast({
-            title: t('phoneNumber.error.title'),
             message: t('phoneNumber.error.message'),
           });
         }
@@ -140,7 +139,6 @@ export default function OTPPage({ params }: OTPPageProps) {
         errorTimeoutRef.current = null;
       }, 2000);
       showToast({
-        title: t('smsCode.error.title'),
         message: t('smsCode.error.message'),
       });
     }
@@ -155,7 +153,6 @@ export default function OTPPage({ params }: OTPPageProps) {
       setTimer(60);
     } catch {
       showToast({
-        title: t('phoneNumber.error.title'),
         message: t('phoneNumber.error.message'),
       });
     } finally {

@@ -78,7 +78,6 @@ export default function RegisterPage({ params }: RegisterPageProps) {
       const code = watch('code');
       if (!code) {
         showToast({
-          title: t('phoneNumber.error.title'),
           message: t('phoneNumber.error.message'),
         });
         return;
@@ -88,9 +87,7 @@ export default function RegisterPage({ params }: RegisterPageProps) {
       await setAuthToken(signInData.data.token);
       router.replace(`/${lang}/categories`);
     } catch (error) {
-      console.error('Registration error:', error);
       showToast({
-        title: t('phoneNumber.error.title'),
         message: t('phoneNumber.error.message'),
       });
     }

@@ -10,6 +10,7 @@ import { deleteUser } from '@/lib/api/user';
 import { Dialog } from '@/shared/ui/Dialog/Dialog';
 import { Button } from '@/shared/ui/Button/Button';
 import { Typography } from '@/shared/ui/Typography/Typography';
+import { useToastStore } from '@/stores/toast';
 import { SidebarProps } from './types';
 import styles from './Sidebar.module.css';
 
@@ -24,6 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const t = useTranslations('Profile');
   const router = useRouter();
   const initials = userName ? getInitials(userName) : null;
+  const showToast = useToastStore((state) => state.showToast);
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const [isDeleteAccountDialogOpen, setIsDeleteAccountDialogOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -59,8 +61,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
       setIsLogoutDialogOpen(false);
       onClose();
       router.push(`/${locale}/login`);
-    } catch (error) {
-      console.error('Error logging out:', error);
+    } catch {
+      showToast({
+        message: t('error.logout'),
+      });
     }
   };
 
@@ -77,8 +81,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
       setIsDeleting(false);
       onClose();
       router.push(`/${locale}/login`);
-    } catch (error) {
-      console.error('Error deleting account:', error);
+    } catch {
+      showToast({
+        message: t('error.deleteAccount'),
+      });
       setIsDeleting(false);
     }
   };

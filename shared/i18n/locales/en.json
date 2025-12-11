@@ -26,7 +26,11 @@
       "okButton": "Yes, delete forever",
       "cancelButton": "No, I changed my mind"
     },
-    "createAccountButton": "Create Account"
+    "createAccountButton": "Create Account",
+    "error": {
+      "logout": "Error logging out",
+      "deleteAccount": "Error deleting account"
+    }
   },
   "Auth": {
     "phoneNumber": {
@@ -47,8 +51,7 @@
         "terms": "You must agree to the terms"
       },
       "error": {
-        "title": "Unable to Proceed",
-        "message": "Something went wrong, please try again"
+        "message": "Something went wrong"
       }
     },
     "smsCode": {
@@ -60,8 +63,7 @@
         "required": "Code is required"
       },
       "error": {
-        "title": "Invalid code",
-        "message": "The code you entered is incorrect. Please try again"
+        "message": "The code you entered is incorrect"
       }
     },
     "userType": {
@@ -165,6 +167,9 @@
       "title": "Cart contents have changed",
       "helpText": "Some items are out of stock, please check your cart before ordering",
       "okButtonText": "Check"
+    },
+    "error": {
+      "checkCart": "Error checking cart"
     }
   },
   "Address": {
@@ -206,7 +211,10 @@
     "deleteErrorTitle": "Delete error",
     "deleteErrorMessage": "Failed to delete address, please try again",
     "setMainErrorTitle": "Set error",
-    "setMainErrorMessage": "Failed to set address as main, please try again"
+    "setMainErrorMessage": "Failed to set address as main, please try again",
+    "error": {
+      "searchAddress": "Error searching addresses"
+    }
   },
   "NoAddressesPage": {
     "title": "No address — no hookah",
@@ -416,7 +424,22 @@
     "addresses": "Addresses",
     "workingHours": "Working hours",
     "description": "Description",
-    "emptyBlockSubtitle": "Want to collaborate with us? Call us!"
+    "emptyBlockSubtitle": "Want to collaborate with us? Call us!",
+    "error": {
+      "openPhone": "Failed to open phone number"
+    }
+  },
+  "Cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "emptySubtitle": "Add items to start shopping",
+    "checkout": "Checkout",
+    "selectAll": "Select all",
+    "delete": "Delete",
+    "total": "Total",
+    "error": {
+      "checkCart": "Error checking cart"
+    }
   },
   "noInternet": {
     "title": "No Internet Connection",

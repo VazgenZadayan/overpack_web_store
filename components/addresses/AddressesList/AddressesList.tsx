@@ -12,6 +12,7 @@ import { getAddresses, deleteAddress, setMainAddress } from '@/lib/api/addresses
 import { IAddress } from '@/shared/types/address';
 import { AddressCard } from '../AddressCard/AddressCard';
 import { usePathname } from 'next/navigation';
+import { useToastStore } from '@/stores/toast';
 import Link from 'next/link';
 import styles from './AddressesList.module.css';
 
@@ -21,6 +22,7 @@ export const AddressesList: React.FC = () => {
   const tNoAddress = useTranslations('NoAddressesPage');
   const pathname = usePathname();
   const { data, isLoading, mutate } = useSWR('addresses', getAddresses);
+  const showToast = useToastStore((state) => state.showToast);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [setMainDialogOpen, setSetMainDialogOpen] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState<number | null>(null);
@@ -55,12 +57,14 @@ export const AddressesList: React.FC = () => {
       setDeleteDialogOpen(false);
       setSelectedAddressId(null);
       mutate();
-    } catch (error) {
-      console.error('Error deleting address:', error);
+    } catch {
+      showToast({
+        message: t('deleteErrorMessage'),
+      });
       setDeleteDialogOpen(false);
       setSelectedAddressId(null);
     }
-  }, [selectedAddressId, mutate]);
+  }, [selectedAddressId, mutate, showToast, t]);
 
   const handleSetMainClick = useCallback((id: number) => {
     const address = addresses.find((a: IAddress) => a.id === id);
@@ -76,12 +80,14 @@ export const AddressesList: React.FC = () => {
       setSetMainDialogOpen(false);
       setSelectedAddressId(null);
       mutate();
-    } catch (error) {
-      console.error('Error setting main address:', error);
+    } catch {
+      showToast({
+        message: t('setMainErrorMessage'),
+      });
       setSetMainDialogOpen(false);
       setSelectedAddressId(null);
     }
-  }, [selectedAddressId, mutate]);
+  }, [selectedAddressId, mutate, showToast, t]);
 
   if (isEmpty) {
     return (

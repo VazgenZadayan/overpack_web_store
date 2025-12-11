@@ -14,6 +14,7 @@ import { CartProductCard } from '../CartProductCard/CartProductCard';
 import { formatPrice, areCartsEqual } from '@/utils/helpers';
 import { getProductsByIds } from '@/lib/api/products';
 import { IGetProductListResponse } from '@/shared/types/products';
+import { useToastStore } from '@/stores/toast';
 import styles from './Cart.module.css';
 
 export const Cart: React.FC = () => {
@@ -21,6 +22,7 @@ export const Cart: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { items, removeFromCart, setCart } = useCartStore();
+  const showToast = useToastStore((state) => state.showToast);
   const [isSelectionMode, setIsSelectionMode] = useState(false);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -135,12 +137,14 @@ export const Cart: React.FC = () => {
     try {
       const data = await getProductsByIds(currentIds);
       handleUpdateCart(data);
-    } catch (error) {
-      console.error('Error checking cart items:', error);
+    } catch {
+      showToast({
+        message: t('error.checkCart'),
+      });
     } finally {
       setIsCheckingCart(false);
     }
-  }, [items, isCheckingCart, handleUpdateCart]);
+  }, [items, isCheckingCart, handleUpdateCart, showToast, t]);
 
   const handleQuantityChange = useCallback(() => {
     if (checkCartTimeoutRef.current) {

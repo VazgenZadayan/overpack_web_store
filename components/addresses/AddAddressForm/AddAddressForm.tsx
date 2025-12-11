@@ -11,14 +11,17 @@ import { Breadcrumbs } from '@/shared/ui/Breadcrumbs/Breadcrumbs';
 import { geocoderService } from '@/lib/services/geocoder';
 import { addAddress } from '@/lib/api/addresses';
 import { IAddressSuggestion } from '@/shared/types/address';
+import { useToastStore } from '@/stores/toast';
 import styles from './AddAddressForm.module.css';
 
 export const AddAddressForm: React.FC = () => {
   const t = useTranslations('Address');
   const tCategories = useTranslations('CategoriesPage');
+  const tError = useTranslations('addressAddError');
   const router = useRouter();
   const pathname = usePathname();
   const lang = pathname.split('/')[1] || 'en';
+  const showToast = useToastStore((state) => state.showToast);
 
   const breadcrumbsItems = [
     {
@@ -57,11 +60,13 @@ export const AddAddressForm: React.FC = () => {
       const results = await geocoderService.searchAddress(query);
       setSuggestions(results);
       setShowSuggestions(true);
-    } catch (error) {
-      console.error('Error searching addresses:', error);
+    } catch {
+      showToast({
+        message: t('error.searchAddress'),
+      });
       setSuggestions([]);
     }
-  }, []);
+  }, [showToast, t]);
 
   const handleAddressTextChange = useCallback((text: string) => {
     setAddressText(text);
@@ -160,12 +165,13 @@ export const AddAddressForm: React.FC = () => {
       const lang = pathname.split('/')[1] || 'en';
       router.push(`/${lang}/profile/addresses`);
     } catch (error) {
-      console.error('Error adding address:', error);
-      alert(t('AddErrorMessage'));
+      showToast({
+        message: tError('AddErrorMessage'),
+      });
     } finally {
       setIsSubmitting(false);
     }
-  }, [selectedAddress, entrance, apartment, floor, intercom, other, t, router, pathname]);
+  }, [selectedAddress, entrance, apartment, floor, intercom, other, t, router, pathname, showToast, tError]);
 
   return (
     <>

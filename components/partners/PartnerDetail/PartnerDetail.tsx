@@ -11,6 +11,7 @@ import { Breadcrumbs } from '@/shared/ui/Breadcrumbs/Breadcrumbs';
 import { PartnerGallery } from '../PartnerGallery/PartnerGallery';
 import { getPartners } from '@/lib/api/partners';
 import { extractIdFromSlug } from '@/utils/slug';
+import { useToastStore } from '@/stores/toast';
 import styles from './PartnerDetail.module.css';
 
 export const PartnerDetail: React.FC = () => {
@@ -19,6 +20,7 @@ export const PartnerDetail: React.FC = () => {
   const params = useParams();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
+  const showToast = useToastStore((state) => state.showToast);
 
   const slug = (params?.slug as string) || '';
   const lang = pathname.split('/')[1] || 'en';
@@ -53,8 +55,10 @@ export const PartnerDetail: React.FC = () => {
     setIsLoading(true);
     try {
       window.location.href = `tel:${partner.phone}`;
-    } catch (error) {
-      console.error('Error opening phone:', error);
+    } catch {
+      showToast({
+        message: t('error.openPhone'),
+      });
     } finally {
       setIsLoading(false);
     }

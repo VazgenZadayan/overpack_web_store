@@ -71,7 +71,6 @@ export default function LoginPage({ params }: LoginPageProps) {
     } catch {
       setIsDialogOpen(false);
       showToast({
-        title: t('phoneNumber.error.title'),
         message: t('phoneNumber.error.message'),
       });
     } finally {

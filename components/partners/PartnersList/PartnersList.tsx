@@ -37,7 +37,6 @@ export const PartnersList: React.FC = () => {
         <div className={styles.header}>
           <Breadcrumbs items={breadcrumbsItems} locale={lang} />
         </div>
-        <div className={styles.loading}>Загрузка...</div>
       </div>
     );
   }
