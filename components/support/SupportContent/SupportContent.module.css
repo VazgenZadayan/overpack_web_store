@@ -1,0 +1,154 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.header {
+  padding: 0 4px;
+}
+
+.title {
+  color: var(--color-dark);
+  margin-top: 8px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  padding-right: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.section {
+  width: 100%;
+}
+
+.description {
+  color: var(--color-secondary-text);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.card {
+  background: var(--color-white);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--color-gray);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.cardTitle {
+  color: var(--color-dark);
+  margin-bottom: 16px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.contactItem:hover {
+  opacity: 0.8;
+}
+
+.contactIconWrapper {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: var(--color-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.contactItem:hover .contactIconWrapper {
+  transform: scale(1.1);
+}
+
+.contactIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-white-constant);
+}
+
+.contactContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.contactLabel {
+  color: var(--color-dark);
+  margin-bottom: 4px;
+}
+
+.contactValue {
+  color: var(--color-secondary-text);
+  line-height: 1.6;
+  word-break: break-word;
+  margin-bottom: 4px;
+}
+
+.contactNote {
+  color: var(--color-secondary-text);
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+.workingHoursItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.workingHoursIconWrapper {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: var(--color-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workingHoursIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-white-constant);
+}
+
+.workingHoursText {
+  color: var(--color-secondary-text);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.additionalInfo {
+  color: var(--color-secondary-text);
+  line-height: 1.6;
+}
+
