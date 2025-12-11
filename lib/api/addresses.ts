@@ -1,10 +1,10 @@
+import { IBaseSuccessResponse } from '@/shared/types/common';
 import { fetcher } from './fetcher';
 import type {
   IGetAddresses,
   IAddAddress,
   IDeleteAddress,
   ISetMainAddress,
-  IBaseSuccessResponse,
 } from '@/shared/types/address';
 
 export async function getAddresses(): Promise<IGetAddresses> {

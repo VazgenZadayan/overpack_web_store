@@ -40,7 +40,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         <div className={styles.lottieContainer}>
           <Lottie
             animationData={animationData}
-            loop={false}
+            loop={true}
             autoplay
             className={styles.lottie}
           />

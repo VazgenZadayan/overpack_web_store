@@ -1,0 +1,90 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.card:hover:not(.main) {
+  border-color: var(--color-icon);
+}
+
+.card.main {
+  border-left: 3px solid var(--color-main);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.cardIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardIcon {
+  color: var(--color-icon);
+}
+
+.card.main .cardIcon {
+  color: var(--color-main);
+}
+
+.cardText {
+  color: var(--color-dark);
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.mainBadge {
+  padding: 4px 12px;
+  background: var(--color-main);
+  color: var(--color-white-constant);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-icon);
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  color: var(--color-main);
+}
+

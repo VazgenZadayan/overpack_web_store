@@ -290,6 +290,7 @@
   },
   "paymentCards": {
     "title": "My Cards",
+    "mainBadge": "Main",
     "addCard": {
       "title": "Add Card",
       "notReady": "This feature is not ready yet",

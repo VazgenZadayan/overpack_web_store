@@ -304,6 +304,7 @@
     }
   },
   "paymentCards": {
+    "mainBadge": "Հիմնական",
     "title": "Իմ քարտերը",
     "setMainCard": {
       "title": "Սահմանել որպես հիմնական քարտ",
