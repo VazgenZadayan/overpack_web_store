@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  background: var(--color-gray);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  background: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardTopContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.orderNumber {
+  color: var(--color-main);
+}
+
+.price {
+  color: var(--color-dark);
+  white-space: nowrap;
+}
+
+.locationWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon {
+  color: var(--color-icon);
+  flex-shrink: 0;
+}
+
+.address {
+  color: var(--color-dark);
+  word-break: break-word;
+  flex: 1;
+}
+
+.dateTime {
+  color: var(--color-secondary-text);
+}
+

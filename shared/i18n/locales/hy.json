@@ -281,7 +281,8 @@
         "delivered": "Հանձնված",
         "estimatedDeliveryTime": "Առաքման համալրված ժամանակը: {{time}}"
       },
-      "callCourier": "Զանգել կուրյերին"
+      "callCourier": "Զանգել կուրյերին",
+      "callCourierError": "Չհաջողվեց ստանալ կուրյերի հեռախոսահամարը"
     },
     "receipt": {
       "download": "Ներբեռնել ստացականը",

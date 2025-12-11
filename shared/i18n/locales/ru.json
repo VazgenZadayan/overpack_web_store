@@ -260,7 +260,8 @@
         "delivered": "Доставлено",
         "estimatedDeliveryTime": "Ожидаемое время доставки: {{time}}"
       },
-      "callCourier": "Позвонить курьеру"
+      "callCourier": "Позвонить курьеру",
+      "callCourierError": "Не удалось получить номер курьера"
     },
     "receipt": {
       "download": "Скачать чек",

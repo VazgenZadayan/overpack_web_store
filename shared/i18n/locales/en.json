@@ -266,7 +266,8 @@
         "delivered": "Delivered",
         "estimatedDeliveryTime": "Estimated delivery time: {{time}}"
       },
-      "callCourier": "Call Courier"
+      "callCourier": "Call Courier",
+      "callCourierError": "Failed to get courier phone number"
     },
     "receipt": {
       "download": "Download Receipt",
