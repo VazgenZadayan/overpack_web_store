@@ -10,6 +10,7 @@ import Lottie from 'lottie-react';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@/shared/contexts/ThemeProvider';
 import { IRegistrationFormData } from '@/shared/types/auth';
+import styles from './select-user-type.module.css';
 
 interface SelectUserTypePageProps {
   params: Promise<{ lang: string }>;
@@ -51,47 +52,34 @@ export default function SelectUserTypePage({ params }: SelectUserTypePageProps) 
   };
 
   return (
-    <div 
-      className="min-h-screen flex flex-col relative overflow-hidden"
-      style={{ 
-        backgroundColor: 'var(--color-background)',
-      }}
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col items-center justify-center pt-6 px-4">
-        <Logo theme={resolvedTheme} className="h-16 w-auto mb-8" />
+    <div className={styles.container}>
+      <div className={styles.topSection}>
+        <Logo theme={resolvedTheme} className={`h-16 w-auto mb-8 ${styles.logo}`} />
+        <Typography 
+          variant="h2" 
+          className={`text-center ${styles.tagline}`}
+          style={{ color: 'var(--color-secondary-text)' }}
+        >
+          {t('phoneNumber.tagline')}
+        </Typography>
       </div>
 
-      <div className="relative z-10 flex-1 flex items-end justify-center px-4 pb-0">
-        <div className="w-full max-w-md">
-          <div 
-            className="rounded-t-3xl shadow-2xl px-6 pt-8 pb-8 flex flex-col"
-            style={{ 
-              backgroundColor: 'var(--color-white)',
-              minHeight: '65vh'
-            }}
-          >
-            <div className="mb-6">
-              <Typography
-                variant="h3" 
-                style={{ color: 'var(--color-dark)' }}
-              >
-                {t('userType.title')}
-              </Typography>
-            </div>
+      <div className={styles.formSectionMobile}>
+        <div className={styles.formCardMobile}>
+          <div className={styles.formTitle}>
+            <Typography
+              variant="h3" 
+              style={{ color: 'var(--color-dark)' }}
+            >
+              {t('userType.title')}
+            </Typography>
+          </div>
 
-            <div className="flex-1 flex flex-col space-y-4">
+          <div className={styles.formContent}>
+            <div className={styles.buttonsWrapper}>
               <button
                 onClick={() => handleUserTypeSelect(UserType.USER)}
-                className="flex items-center justify-between p-4 rounded-2xl transition-all hover:opacity-80 active:opacity-60"
-                style={{ backgroundColor: 'var(--color-gray)' }}
+                className={styles.userTypeButton}
               >
                 <Typography
                   variant="bodyLBold"
@@ -115,8 +103,7 @@ export default function SelectUserTypePage({ params }: SelectUserTypePageProps) 
 
               <button
                 onClick={() => handleUserTypeSelect(UserType.BUSINESS)}
-                className="flex items-center justify-between p-4 rounded-2xl transition-all hover:opacity-80 active:opacity-60"
-                style={{ backgroundColor: 'var(--color-gray)' }}
+                className={styles.userTypeButton}
               >
                 <Typography
                   variant="bodyLBold"
@@ -137,18 +124,18 @@ export default function SelectUserTypePage({ params }: SelectUserTypePageProps) 
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </button>
+            </div>
 
-              <div className="flex-1 flex items-center justify-center">
-                <div className="w-64 h-48 flex items-center justify-center">
-                  {animationData ? (
-                    <Lottie
-                      animationData={animationData}
-                      loop
-                      autoplay
-                      style={{ width: '100%', height: '100%' }}
-                    />
-                  ) : null}
-                </div>
+            <div className={styles.lottieWrapper}>
+              <div className={styles.lottieContainer}>
+                {animationData ? (
+                  <Lottie
+                    animationData={animationData}
+                    loop
+                    autoplay
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                ) : null}
               </div>
             </div>
           </div>

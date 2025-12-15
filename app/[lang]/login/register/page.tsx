@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { useTheme } from '@/shared/contexts/ThemeProvider';
 import { IRegistrationFormData, ISignUpRequest } from '@/shared/types/auth';
 import { setAuthToken } from '@/utils/auth';
+import styles from './register.module.css';
 
 interface RegisterPageProps {
   params: Promise<{ lang: string }>;
@@ -94,85 +95,71 @@ export default function RegisterPage({ params }: RegisterPageProps) {
   };
 
   return (
-    <div 
-      className="min-h-screen flex flex-col relative overflow-hidden"
-      style={{ 
-        backgroundColor: 'var(--color-background)',
-      }}
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col items-center justify-center pt-6 px-4">
-        <Logo theme={resolvedTheme} className="h-16 w-auto mb-8" />
+    <div className={styles.container}>
+      <div className={styles.topSection}>
+        <Logo theme={resolvedTheme} className={`h-16 w-auto mb-8 ${styles.logo}`} />
+        <Typography 
+          variant="h2" 
+          className={`text-center ${styles.tagline}`}
+          style={{ color: 'var(--color-secondary-text)' }}
+        >
+          {t('phoneNumber.tagline')}
+        </Typography>
       </div>
 
-      <div className="relative z-10 flex-1 flex items-end justify-center px-4 pb-0">
-        <div className="w-full max-w-md">
-          <div 
-            className="rounded-t-3xl shadow-2xl px-6 pt-8 pb-8 flex flex-col"
-            style={{ 
-              backgroundColor: 'var(--color-white)',
-              minHeight: '65vh'
-            }}
-          >
-            <div className="mb-6">
-              <Typography
-                variant="h3" 
-                style={{ color: 'var(--color-dark)' }}
-              >
-                {isPartner ? t('partner.name.title') : t('client.name.title')}
-              </Typography>
+      <div className={styles.formSectionMobile}>
+        <div className={styles.formCardMobile}>
+          <div className={styles.formTitle}>
+            <Typography
+              variant="h3" 
+              style={{ color: 'var(--color-dark)' }}
+            >
+              {isPartner ? t('partner.name.title') : t('client.name.title')}
+            </Typography>
+          </div>
+
+          <div className={styles.formContent}>
+            <div className={styles.formFields}>
+              <Input
+                name="name"
+                control={control}
+                placeholder={isPartner ? t('partner.name.placeholder') : t('client.name.placeholder')}
+                required
+              />
+
+              {isPartner && (
+                <Input
+                  name="documentNumber"
+                  control={control}
+                  placeholder={t('partner.tin.placeholder')}
+                  required
+                  type="text"
+                  inputMode="numeric"
+                />
+              )}
             </div>
 
-            <div className="flex-1 flex flex-col space-y-6">
-              <div className="space-y-4">
-                <Input
-                  name="name"
-                  control={control}
-                  placeholder={isPartner ? t('partner.name.placeholder') : t('client.name.placeholder')}
-                  required
-                />
-
-                {isPartner && (
-                  <Input
-                    name="documentNumber"
-                    control={control}
-                    placeholder={t('partner.tin.placeholder')}
-                    required
-                    type="text"
-                    inputMode="numeric"
+            <div className={styles.lottieWrapper}>
+              <div className={styles.lottieContainer}>
+                {animationData ? (
+                  <Lottie
+                    animationData={animationData}
+                    loop
+                    autoplay
+                    style={{ width: '100%', height: '100%' }}
                   />
-                )}
+                ) : null}
               </div>
+            </div>
 
-              <div className="flex-1 flex items-center justify-center">
-                <div className="w-48 h-48 flex items-center justify-center">
-                  {animationData ? (
-                    <Lottie
-                      animationData={animationData}
-                      loop
-                      autoplay
-                      style={{ width: '100%', height: '100%' }}
-                    />
-                  ) : null}
-                </div>
-              </div>
-
-              <div className="mt-auto pt-6">
-                <Button
-                  label={isPartner ? t('partner.name.register') : t('client.name.register')}
-                  variant="danger"
-                  onClick={handleRegister}
-                  isDisabled={!isFormValid}
-                  className="w-full"
-                />
-              </div>
+            <div className={styles.buttonWrapper}>
+              <Button
+                label={isPartner ? t('partner.name.register') : t('client.name.register')}
+                variant="danger"
+                onClick={handleRegister}
+                isDisabled={!isFormValid}
+                className="w-full"
+              />
             </div>
           </div>
         </div>
