@@ -14,6 +14,7 @@ import { useTheme } from '@/shared/contexts/ThemeProvider';
 import { IRegistrationFormData } from '@/shared/types/auth';
 import { setAuthToken } from '@/utils/auth';
 import Lottie from 'lottie-react';
+import styles from './otp.module.css';
 interface OTPPageProps {
   params: Promise<{ lang: string }>;
 }
@@ -161,50 +162,38 @@ export default function OTPPage({ params }: OTPPageProps) {
   };
 
   return (
-    <div 
-      className="min-h-screen flex flex-col relative overflow-hidden"
-      style={{ 
-        backgroundColor: 'var(--color-background)',
-      }}
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col items-center justify-center pt-6 px-4">
-        <Logo theme={resolvedTheme} className="h-16 w-auto mb-8" />
+    <div className={styles.container}>
+      <div className={styles.topSection}>
+        <Logo theme={resolvedTheme} className={`h-16 w-auto mb-8 ${styles.logo}`} />
+        <Typography 
+          variant="h2" 
+          className={`text-center ${styles.tagline}`}
+          style={{ color: 'var(--color-secondary-text)' }}
+        >
+          {t('phoneNumber.tagline')}
+        </Typography>
       </div>
 
-      <div className="relative z-10 flex-1 flex items-end justify-center px-4 pb-0">
-        <div className="w-full max-w-md">
-          <div 
-            className="rounded-t-3xl shadow-2xl px-6 pt-8 pb-8 flex flex-col"
-            style={{ 
-              backgroundColor: 'var(--color-white)',
-              minHeight: '65vh'
-            }}
-          >
-            <div className="mb-6">
-              <Typography
-                variant="h3" 
-                style={{ color: 'var(--color-dark)' }}
-              >
-                {t('smsCode.title')}
-              </Typography>
-              <Typography 
-                variant="bodyLBold"
-                className="mb-4"
-                style={{ color: 'var(--color-secondary-text)' }}
-              >
-                {t('smsCode.subtitle')}
-              </Typography>
-            </div>
+      <div className={styles.formSectionMobile}>
+        <div className={styles.formCardMobile}>
+          <div className={styles.formTitle}>
+            <Typography
+              variant="h3" 
+              style={{ color: 'var(--color-dark)' }}
+            >
+              {t('smsCode.title')}
+            </Typography>
+            <Typography 
+              variant="bodyLBold"
+              className={styles.formSubtitle}
+              style={{ color: 'var(--color-secondary-text)' }}
+            >
+              {t('smsCode.subtitle')}
+            </Typography>
+          </div>
 
-            <div className="flex-1 flex flex-col items-center justify-center space-y-8">
+          <div className={styles.formBody}>
+            <div className={styles.otpWrapper}>
               <OTPInput
                 length={6}
                 autoFocus
@@ -220,43 +209,43 @@ export default function OTPPage({ params }: OTPPageProps) {
                 }}
                 hasError={hasError}
               />
+            </div>
 
-              <div className="w-48 h-48 flex items-center justify-center">
-                {animationData ? (
-                  <Lottie
-                    animationData={animationData}
-                    loop
-                    autoplay
-                    style={{ width: '100%', height: '100%' }}
-                  />
-                ) : null}
-              </div>
+            <div className={styles.lottieWrapper}>
+              {animationData ? (
+                <Lottie
+                  animationData={animationData}
+                  loop
+                  autoplay
+                  style={{ width: '100%', height: '100%' }}
+                />
+              ) : null}
+            </div>
 
-              <div className="text-center">
-                {timer ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <Typography
-                      variant="bodyLSB"
-                      style={{ color: 'var(--color-secondary-text)' }}
-                    >
-                      {t('smsCode.resendTimer')}
-                    </Typography>
-                    <Typography
-                      variant="bodyLSB"
-                      style={{ color: 'var(--color-main)' }}
-                    >
-                      {String(timer)}
-                    </Typography>
-                  </div>
-                ) : (
-                  <Button
-                    label={t('smsCode.resendButton')}
-                    variant="danger"
-                    onClick={handleResendSMS}
-                    isLoading={isResending}
-                  />
-                )}
-              </div>
+            <div className={styles.timerWrapper}>
+              {timer ? (
+                <div className={styles.timerContent}>
+                  <Typography
+                    variant="bodyLSB"
+                    style={{ color: 'var(--color-secondary-text)' }}
+                  >
+                    {t('smsCode.resendTimer')}
+                  </Typography>
+                  <Typography
+                    variant="bodyLSB"
+                    style={{ color: 'var(--color-main)' }}
+                  >
+                    {String(timer)}
+                  </Typography>
+                </div>
+              ) : (
+                <Button
+                  label={t('smsCode.resendButton')}
+                  variant="danger"
+                  onClick={handleResendSMS}
+                  isLoading={isResending}
+                />
+              )}
             </div>
           </div>
         </div>

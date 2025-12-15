@@ -16,6 +16,7 @@ import { Dialog } from '@/shared/ui/Dialog/Dialog';
 import { Logo } from '@/shared/icons/Logo';
 import { useTheme } from '@/shared/contexts/ThemeProvider';
 import { IRegistrationFormData } from '@/shared/types/auth';
+import styles from './login.module.css';
 
 interface LoginPageProps {
   params: Promise<{ lang: string }>;
@@ -98,126 +99,105 @@ export default function LoginPage({ params }: LoginPageProps) {
   };
 
   return (
-    <div 
-      className="min-h-screen flex flex-col relative overflow-hidden"
-      style={{ 
-        backgroundColor: 'var(--color-background)',
-      }}
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col items-center justify-center pt-6 px-4">
-        <Logo theme={resolvedTheme} className="h-16 w-auto mb-8" />
+    <div className={styles.container}>
+      <div className={styles.topSection}>
+        <Logo theme={resolvedTheme} className={`h-16 w-auto mb-8 ${styles.logo}`} />
         <Typography 
           variant="h2" 
-          className="text-center"
+          className={`text-center ${styles.tagline}`}
           style={{ color: 'var(--color-secondary-text)' }}
         >
           {t('phoneNumber.tagline')}
         </Typography>
       </div>
 
-      <div className="relative z-10 flex-1 flex items-end justify-center px-4 pb-0">
-        <div className="w-full max-w-md">
-          <div 
-            className="rounded-t-3xl shadow-2xl px-6 pt-8 pb-2 flex flex-col"
-            style={{ 
-              backgroundColor: 'var(--color-white)',
-              minHeight: '65vh'
-            }}
+      <div className={styles.formSectionMobile}>
+        <div className={styles.formCardMobile}>
+          <div className={styles.formTitle}>
+            <Typography
+              variant="h3" 
+              style={{ color: 'var(--color-dark)' }}
+            >
+              {t('phoneNumber.title')}
+            </Typography>
+            <Typography 
+              variant="bodyLBold"
+              className={styles.formSubtitle}
+              style={{ color: 'var(--color-secondary-text)' }}
+            >
+              {t('phoneNumber.subtitle')}
+            </Typography>
+          </div>
+
+          <form 
+            className={styles.formContent}
+            onSubmit={(e) => e.preventDefault()}
           >
-            <div className="mb-6">
-              <Typography
-                variant="h3" 
-                style={{ color: 'var(--color-dark)' }}
-              >
-                {t('phoneNumber.title')}
-              </Typography>
-              <Typography 
-                variant="bodyLBold"
-                className="mb-4"
-                style={{ color: 'var(--color-secondary-text)' }}
-              >
-                {t('phoneNumber.subtitle')}
-              </Typography>
+            <div className={styles.formFields}>
+              <PhoneInput
+                name="phone"
+                control={formContext.control}
+                placeholder={t('phoneNumber.placeholder')}
+                required
+              />
+
+              <div className={styles.checkboxWrapper}>
+                <div className="mt-0.5 flex-shrink-0">
+                  <Checkbox
+                    isChecked={checkbox}
+                    onPress={() => {
+                      setValue('checkbox', !checkbox, { shouldValidate: true });
+                    }}
+                  />
+                </div>
+                <div className={styles.checkboxText}>
+                  <Typography 
+                    variant="bodyXSMed"
+                    style={{ 
+                      color: 'var(--color-secondary-text)',
+                      lineHeight: '1.5'
+                    }}
+                  >
+                    {t('phoneNumber.termsPrefix')}
+                    <Link
+                      href={`/${lang}/privacy-policy`}
+                      className="underline"
+                      style={{ 
+                        color: 'var(--color-main)',
+                        textDecorationColor: 'var(--color-main)',
+                        textUnderlineOffset: '2px'
+                      }}
+                    >
+                      {t('phoneNumber.privacy')}
+                    </Link>
+                    {t('phoneNumber.termsSuffix')}
+                    <Link
+                      href={`/${lang}/terms-of-use`}
+                      className="underline"
+                      style={{ 
+                        color: 'var(--color-main)',
+                        textDecorationColor: 'var(--color-main)',
+                        textUnderlineOffset: '2px'
+                      }}
+                    >
+                      {t('phoneNumber.agreement')}
+                    </Link>
+                  </Typography>
+                </div>
+              </div>
             </div>
 
-            <form 
-              className="flex flex-col flex-1"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div className="space-y-10 flex-1">
-                <PhoneInput
-                  name="phone"
-                  control={formContext.control}
-                  placeholder={t('phoneNumber.placeholder')}
-                  required
-                />
-
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 flex-shrink-0">
-                      <Checkbox
-                        isChecked={checkbox}
-                        onPress={() => {
-                          setValue('checkbox', !checkbox, { shouldValidate: true });
-                        }}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <Typography 
-                        variant="bodyXSMed"
-                        style={{ 
-                          color: 'var(--color-secondary-text)',
-                          lineHeight: '1.5'
-                        }}
-                      >
-                        {t('phoneNumber.termsPrefix')}
-                        <Link
-                          href={`/${lang}/privacy-policy`}
-                          className="underline"
-                          style={{ 
-                            color: 'var(--color-main)',
-                            textDecorationColor: 'var(--color-main)',
-                            textUnderlineOffset: '2px'
-                          }}
-                        >
-                          {t('phoneNumber.privacy')}
-                        </Link>
-                        {t('phoneNumber.termsSuffix')}
-                        <Link
-                          href={`/${lang}/terms-of-use`}
-                          className="underline"
-                          style={{ 
-                            color: 'var(--color-main)',
-                            textDecorationColor: 'var(--color-main)',
-                            textUnderlineOffset: '2px'
-                          }}
-                        >
-                          {t('phoneNumber.agreement')}
-                        </Link>
-                      </Typography>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mt-auto pt-6">
-                  <Button
-                    label={t('phoneNumber.getCode')}
-                    variant="danger"
-                    onClick={handleSignIn}
-                    isDisabled={!isValidPhone || !checkbox}
-                    isLoading={isLoading}
-                    className="w-full"
-                  />
-              </div>
-            </form>
-          </div>
+            <div className={styles.buttonWrapper}>
+              <Button
+                label={t('phoneNumber.getCode')}
+                variant="danger"
+                onClick={handleSignIn}
+                isDisabled={!isValidPhone || !checkbox}
+                isLoading={isLoading}
+                className="w-full"
+              />
+            </div>
+          </form>
         </div>
       </div>
 
