@@ -416,10 +416,6 @@
     "title": "It's empty here for now",
     "subtitle": "If you want to list your products with us — contact us and we'll discuss everything over a hookah!"
   },
-  "NoAddressesPage": {
-    "title": "No address — no hookah",
-    "subtitle": "Please provide a delivery address so we can proceed."
-  },
   "Partners": {
     "title": "Our partners",
     "reserveTable": "Reserve table",
@@ -429,18 +425,6 @@
     "emptyBlockSubtitle": "Want to collaborate with us? Call us!",
     "error": {
       "openPhone": "Failed to open phone number"
-    }
-  },
-  "Cart": {
-    "title": "Cart",
-    "empty": "Your cart is empty",
-    "emptySubtitle": "Add items to start shopping",
-    "checkout": "Checkout",
-    "selectAll": "Select all",
-    "delete": "Delete",
-    "total": "Total",
-    "error": {
-      "checkCart": "Error checking cart"
     }
   },
   "noInternet": {

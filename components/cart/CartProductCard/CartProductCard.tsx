@@ -30,6 +30,7 @@ export const CartProductCard: React.FC<CartProductCardProps> = ({
 }) => {
   const t = useTranslations('common');
   const tCart = useTranslations('Cart');
+  const tProduct = useTranslations('Product');
   const { updateQuantity, removeFromCart } = useCartStore();
   const { id, title, price, image, size, quantity, countInCart } = item;
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -101,7 +102,7 @@ export const CartProductCard: React.FC<CartProductCardProps> = ({
           )}
           {isOutOfStock ? (
             <Typography variant="bodySBold" className={styles.outOfStock}>
-              Нет в наличии
+              {tProduct('outOfStock')}
             </Typography>
           ) : (
             <Typography variant="bodySBold" className={styles.price}>
@@ -137,7 +138,7 @@ export const CartProductCard: React.FC<CartProductCardProps> = ({
             type="button"
             onClick={handleDeleteClick}
             className={styles.deleteButton}
-            aria-label="Удалить товар"
+            aria-label={tCart('deleteItemModal.title')}
           >
             <Trash2 size={22} />
           </button>

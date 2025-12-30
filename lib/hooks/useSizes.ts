@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 import type { IGetSizesResponse } from '@/shared/types/products';
+import { useMemo } from 'react';
 
 interface UseSizesParams {
   categoryId?: string;
@@ -26,9 +27,18 @@ export function useSizes(params: UseSizesParams) {
       dedupingInterval: 300000,
     }
   );
+  const filteredData = useMemo(() => {
+    return data?.data.sizes.filter((size) => size !== null) || [];
+  }, [data]);
 
   return {
-    data,
+    data: {
+      ...data,
+      data: {
+        ...data?.data,
+        sizes: filteredData,
+      },
+    },
     isLoading,
     isError: error,
     mutate,
