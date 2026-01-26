@@ -27,7 +27,7 @@ export const PartnersList: React.FC = () => {
     },
     {
       label: t('title'),
-      href: `/${lang}/profile/partners`,
+      href: `/${lang}/partners`,
     },
   ];
 

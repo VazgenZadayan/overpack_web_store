@@ -3,7 +3,7 @@ import type { IGetCategoriesResponse } from '@/shared/types/products';
 
 export function useCategories() {
   const { data, error, isLoading, mutate } = useSWR<IGetCategoriesResponse>(
-    '/category',
+    '/category/web',
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,

@@ -9,6 +9,9 @@ import { useCartStore } from '@/stores/cart';
 import { ProductCardProps } from './types';
 import styles from './ProductCard.module.css';
 import { formatPrice } from '@/utils/helpers';
+import { useGuestModeModal } from '@/lib/hooks/useGuestModeModal';
+import { GuestModeModal } from '@/shared/ui/GuestModeModal/GuestModeModal';
+import { useUser } from '@/lib/hooks/useUser';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   id,
@@ -27,12 +30,26 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const countInCart = cartItem?.countInCart || 0;
   const isOutOfStock = quantity === 0;
   const isStockLimitReached = countInCart >= quantity;
+  const { user } = useUser();
+  const isAuthenticated = !!user;
+  const {
+    isVisible,
+    showModal,
+    hideModal,
+    handleLogin,
+    handleContinueAsGuest,
+  } = useGuestModeModal();
 
   const handleAddToCart = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       if (isOutOfStock || isStockLimitReached) return;
+
+      if (!isAuthenticated) {
+        showModal();
+        return;
+      }
 
       addToCart({
         id,
@@ -46,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         countInCart: 0,
       });
     },
-    [id, price, image, size, quantity, description, createdAt, title, isOutOfStock, isStockLimitReached, addToCart]
+    [id, price, image, size, quantity, description, createdAt, title, isOutOfStock, isStockLimitReached, addToCart, showModal, isAuthenticated]
   );
 
   const handleIncrease = useCallback(
@@ -54,13 +71,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       e.preventDefault();
       e.stopPropagation();
       if (isStockLimitReached) return;
+      
+      if (!isAuthenticated) {
+        showModal();
+        return;
+      }
+      
       if (countInCart === 0) {
         handleAddToCart(e);
       } else {
         updateQuantity(id, countInCart + 1);
       }
     },
-    [id, countInCart, isStockLimitReached, handleAddToCart, updateQuantity]
+    [id, countInCart, isStockLimitReached, handleAddToCart, updateQuantity, showModal, isAuthenticated]
   );
 
   const handleDecrease = useCallback(
@@ -141,6 +164,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
       </div>
+      <GuestModeModal
+        isVisible={isVisible}
+        onClose={hideModal}
+        onLogin={handleLogin}
+        onContinueAsGuest={handleContinueAsGuest}
+      />
     </div>
   );
 };

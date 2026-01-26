@@ -90,25 +90,46 @@
   line-height: 1.3;
 }
 
-.timeWrapper {
+.statusBadge {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   padding: 6px 12px;
-  background: var(--color-gray);
   border-radius: 8px;
   width: fit-content;
 }
 
-.timeIcon {
-  color: var(--color-main);
+.statusOpen {
+  background: var(--color-success-background);
+}
+
+.statusClosed {
+  background: var(--color-gray);
+}
+
+.statusIcon {
   flex-shrink: 0;
 }
 
-.workingHours {
+.statusOpen .statusIcon {
+  color: var(--color-success);
+}
+
+.statusClosed .statusIcon {
   color: var(--color-secondary-text);
+}
+
+.statusText {
   font-size: 14px;
+}
+
+.statusOpen .statusText {
+  color: var(--color-success);
+}
+
+.statusClosed .statusText {
+  color: var(--color-secondary-text);
 }
 
 .chevron {

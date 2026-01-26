@@ -66,7 +66,7 @@ export const SupportContent: React.FC = () => {
             <Typography variant="h3" className={styles.cardTitle}>
               {t('email.title')}
             </Typography>
-            <a href="mailto:overpackhookahmarket@gmail.com" className={styles.contactItem}>
+            <a href="mailto:info@overpack.am" className={styles.contactItem}>
               <div className={styles.contactIconWrapper}>
                 <Mail className={styles.contactIcon} />
               </div>
@@ -75,7 +75,7 @@ export const SupportContent: React.FC = () => {
                   {t('email.title')}
                 </Typography>
                 <Typography variant="bodySMed" className={styles.contactValue}>
-                  overpackhookahmarket@gmail.com
+                  info@overpack.am
                 </Typography>
                 <Typography variant="bodyXSMed" className={styles.contactNote}>
                   {t('email.note')}

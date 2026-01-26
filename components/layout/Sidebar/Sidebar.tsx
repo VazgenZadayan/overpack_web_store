@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { X, MapPin, CreditCard, ShoppingBag, Users, Info, LogOut, User } from 'lucide-react';
+import { X, MapPin, CreditCard, ShoppingBag, Users, Info, LogOut, User, LogIn } from 'lucide-react';
 import { getInitials } from '@/utils/helpers';
 import { removeAuthToken } from '@/utils/auth';
 import { deleteUser } from '@/lib/api/user';
@@ -93,9 +93,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { icon: MapPin, label: t('tabs.addresses'), href: `/${locale}/profile/addresses` },
     { icon: CreditCard, label: t('tabs.cards'), href: `/${locale}/profile/cards` },
     { icon: ShoppingBag, label: t('tabs.history'), href: `/${locale}/profile/history` },
-    { icon: Users, label: t('tabs.partnersTitle'), href: `/${locale}/profile/partners` },
+    { icon: Users, label: t('tabs.partnersTitle'), href: `/${locale}/partners` },
     { icon: Info, label: t('tabs.aboutUs'), href: `/${locale}/about` },
   ];
+
+  const isGuest = !userName && !userPhone;
+
+  const handleLoginClick = () => {
+    onClose();
+    router.push(`/${locale}/login`);
+  };
 
   return (
     <>
@@ -159,19 +166,31 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </nav>
 
           <div className={styles.footer}>
-            <button
-              onClick={handleLogoutClick}
-              className={styles.logoutButton}
-            >
-              <LogOut size={20} className={styles.buttonIcon} />
-              <span>{t('logoutButton')}</span>
-            </button>
-            <button
-              onClick={handleDeleteAccountClick}
-              className={styles.deleteButton}
-            >
-              {t('deleteAccountButton')}
-            </button>
+            {isGuest ? (
+              <button
+                onClick={handleLoginClick}
+                className={styles.logoutButton}
+              >
+                <LogIn size={20} className={styles.buttonIcon} />
+                <span>{t('loginOrRegisterButton')}</span>
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={handleLogoutClick}
+                  className={styles.logoutButton}
+                >
+                  <LogOut size={20} className={styles.buttonIcon} />
+                  <span>{t('logoutButton')}</span>
+                </button>
+                <button
+                  onClick={handleDeleteAccountClick}
+                  className={styles.deleteButton}
+                >
+                  {t('deleteAccountButton')}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -27,6 +27,7 @@
       "cancelButton": "No, I changed my mind"
     },
     "createAccountButton": "Create Account",
+    "loginOrRegisterButton": "Login/Register",
     "error": {
       "logout": "Error logging out",
       "deleteAccount": "Error deleting account"
@@ -422,6 +423,8 @@
     "addresses": "Addresses",
     "workingHours": "Working hours",
     "description": "Description",
+    "open": "Open",
+    "closed": "Closed",
     "emptyBlockSubtitle": "Want to collaborate with us? Call us!",
     "error": {
       "openPhone": "Failed to open phone number"
@@ -460,7 +463,7 @@
     },
     "workingHours": {
       "title": "Working Hours",
-      "text": "Monday - Sunday: 10:00 AM - 10:00 PM"
+      "text": "Monday - Sunday: 11:00 AM - 10:00 PM"
     },
     "additionalInfo": "Our support team is always ready to assist you with any questions about orders, delivery, products, or the app."
   },

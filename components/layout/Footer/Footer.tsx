@@ -32,9 +32,9 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
           <div className={styles.column}>
             <h3 className={styles.columnTitle}>{t('contacts')}</h3>
             <div className={styles.contactList}>
-              <a href="tel:+37412345678" className={styles.contactItem}>
+              <a href="tel:+37441919694" className={styles.contactItem}>
                 <Phone size={18} className={styles.contactIcon} />
-                <span>+374 12 345 678</span>
+                <span>+374 41 91 96 94</span>
               </a>
               <a href="mailto:info@overpack.am" className={styles.contactItem}>
                 <Mail size={18} className={styles.contactIcon} />
@@ -68,7 +68,7 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
                 <div className={styles.appSection}>
                   {deviceType === 'ios' && (
                     <a
-                      href="https://apps.apple.com/app/overpack"
+                      href="https://apps.apple.com/am/app/overpack/id6749855441"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.appLink}
@@ -104,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
             <h3 className={styles.columnTitle}>{t('followUs')}</h3>
             <div className={styles.socialSection}>
               <a
-                href="https://www.facebook.com/overpack"
+                href="https://www.facebook.com/share/1C6B4czDW9/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.socialItem} ${styles.facebook}`}
@@ -113,7 +113,7 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
                 <Facebook size={20} />
               </a>
               <a
-                href="https://www.instagram.com/overpack"
+                href="https://www.instagram.com/overpack.am"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.socialItem} ${styles.instagram}`}

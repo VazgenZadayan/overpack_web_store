@@ -9,7 +9,7 @@ const intlMiddleware = createMiddleware({
   alternateLinks: false,
 });
 
-const protectedPaths = ['/categories', '/profile', '/checkout'];
+const protectedPaths = ['/profile', '/checkout'];
 const publicPaths = ['/login'];
 
 export default function proxy(request: NextRequest) {

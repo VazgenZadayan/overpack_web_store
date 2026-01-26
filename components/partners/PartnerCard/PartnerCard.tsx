@@ -1,12 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Clock, ChevronRight } from 'lucide-react';
 import { Typography } from '@/shared/ui/Typography/Typography';
 import { createSlugSegment } from '@/utils/slug';
 import { IPartner } from '@/shared/types/partner';
+import { isPartnerOpen } from '../utils';
 import styles from './PartnerCard.module.css';
 
 interface PartnerCardProps {
@@ -16,10 +18,15 @@ interface PartnerCardProps {
 
 export const PartnerCard: React.FC<PartnerCardProps> = ({ partner, locale }) => {
   const router = useRouter();
+  const t = useTranslations('Partners');
+  const status = useMemo(
+    () => isPartnerOpen(partner.workingHours),
+    [partner.workingHours],
+  );
 
   const handleClick = () => {
     const slug = createSlugSegment(partner.id, partner.name);
-    router.push(`/${locale}/profile/partners/${slug}`);
+    router.push(`/${locale}/partners/${slug}`);
   };
 
   return (
@@ -39,12 +46,18 @@ export const PartnerCard: React.FC<PartnerCardProps> = ({ partner, locale }) => 
           <Typography variant="bodyLBold" className={styles.name}>
             {partner.name}
           </Typography>
-          <div className={styles.timeWrapper}>
-            <Clock size={20} className={styles.timeIcon} />
-            <Typography variant="bodyLMed" className={styles.workingHours}>
-              {partner.workingHours}
-            </Typography>
-          </div>
+          {status !== null && (
+            <div
+              className={`${styles.statusBadge} ${
+                status ? styles.statusOpen : styles.statusClosed
+              }`}
+            >
+              <Clock size={16} className={styles.statusIcon} />
+              <Typography variant="bodySMed" className={styles.statusText}>
+                {status ? t('open') : t('closed')}
+              </Typography>
+            </div>
+          )}
         </div>
       </div>
       <ChevronRight size={20} className={styles.chevron} />
